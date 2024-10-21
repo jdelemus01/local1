@@ -8,12 +8,12 @@ public with sharing class AccountProcessor {
                 FROM Account 
                 WHERE Id = :accIds.get(i)];
             
-            numberOfContacts = [SELECT COUNT(Id) totalContacts
+                numberOfContacts = [SELECT COUNT(Id) totalContacts
                         FROM Contact
                         WHERE AccountId = :accIds.get(i)];
-            
-            thisAccount.Number_of_Contacts__c = (Integer) numberOfContacts[0].get('totalContacts');
-            
+
+                thisAccount.Number_of_Contacts__c = (Integer) numberOfContacts[0].get('totalContacts');
+
             upsert thisAccount;
         }
     }

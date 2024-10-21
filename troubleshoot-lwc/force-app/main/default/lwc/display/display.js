@@ -6,20 +6,20 @@ export default class Display extends LightningElement {
 
   get options() {
     return [
-        { label: '1', value: 1 },
-        { label: '2', value: 2 },
+      { label: '1', value: 1 },
+      { label: '2', value: 2 },
     ];
   }
-  
+
   handleAugmentorChange(event) {
-    this.augmentor = event.target.value;
+    this.augmentor = parseInt(event.target.value);
   }
 
   handleIncrement(event) {
     const operand = event.detail;
     this.counter += operand;
   }
-  
+
   handleDecrement(event) {
     const operand = event.detail;
     this.counter -= operand;

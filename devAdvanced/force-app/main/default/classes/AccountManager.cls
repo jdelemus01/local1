@@ -1,26 +1,18 @@
-@RestResource(urlMapping='/Accounts/*')
+@RestResource(urlMapping='/Accounts/*/contacts')
 global with sharing class AccountManager {
     @HttpGet
-    global static void getAccount(){
+    global static Account getAccount(){
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
         
-        String acId = request.requestURI.substring(request.requestURI.lastIndexOf('/')+1);
+        String acId = request.requestURI.substringBetween('Accounts/', '/contacts');
+        System.debug(acId);
         
-        Account acc = [SELECT Id,Name 
+        Account acc = [SELECT Id, Name, (SELECT Id, Name FROM Contacts) 
                        FROM Account 
                        WHERE Id = :acId];
         
-        List<Contact> contacts = [SELECT Id, Name
-                                  FROM Contact
-                                  WHERE AccountId = :acId];
-        
-        Map<String, Object> result = new Map<String, Object>();
-        result.put('account', acc);
-        result.put('contacts', contacts);
-        
-        
-        response.statusCode = 200;
-        response.responseBody = Blob.valueOf(JSON.serialize(result));
+        System.debug(acc);
+        return acc;
     }
 }

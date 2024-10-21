@@ -1,21 +1,37 @@
 @IsTest
 public with sharing class AccountManagerTest {
-@IsTest
+    @IsTest
     static void testGetAccount() {
-        Account acc = [SELECT Id, Name FROM Account LIMIT 1];
-        List<Contact> conresult = [SELECT Id,Name FROM Contact WHERE AccountId = :acc.Id];
-        // Call the getAccount method
+        Id accountId = makeTestAccount();
+        
         RestRequest request = new RestRequest();
-        RestResponse response = new RestResponse();
-        request.requestURI = 'https://yourInstance.my.salesforce.com/services/apexrest/Cases/' + acc.Id;
+        request.requestUri =
+            'https://yourInstance.my.salesforce.com/services/apexrest/Accounts/'+
+            + accountId + '/contacts';
+        request.httpMethod = 'GET';
+
+        System.debug(request.requestUri);
+        
         RestContext.request = request;
-        RestContext.response = response;
-        Test.startTest();
-        AccountManager.getAccount();
-        Test.stopTest();
-        // Verify the response
-        System.assertEquals(200, response.statusCode, 'Expected status code to be 200');
-        Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(response.responseBody.toString());
-        //System.assertEquals(acc.Id, result.get('account').Id, 'Account Id does not match');
-        System.assertEquals(conresult.size(), ((List<Contact>) result.get('contacts')).size(), 'Contact size does not match');
-    }}
+        
+        Account testAccountResult = AccountManager.getAccount();
+
+        Assert.areEqual(testAccountResult.Id, accountId);
+        Assert.areEqual(3, [SELECT COUNT() FROM Contact WHERE AccountId = :testAccountResult.Id]);
+    }
+
+    static ID makeTestAccount(){
+        Account testAccount = new Account(Name='TestAccount');
+        insert testAccount;
+        
+        Contact con = new Contact(FirstName='Test1',LastName='Test1',AccountId=testAccount.Id);
+        Contact con2 = new Contact(FirstName='Test2',LastName='Test2',AccountId=testAccount.Id);
+        Contact con3 = new Contact(FirstName='Test2',LastName='Test3',AccountId=testAccount.Id);
+        
+        List<Contact> contactsToInsert = new List<Contact>{con,con2,con3};
+        
+        insert contactsToInsert;
+
+        return testAccount.Id;
+    }
+}

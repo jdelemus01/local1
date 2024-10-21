@@ -7,6 +7,7 @@ private class CaseManagerTest {
         request.requestUri =
             'https://yourInstance.my.salesforce.com/services/apexrest/Cases/'
             + recordId;
+        System.debug(request.requestUri);
         request.httpMethod = 'GET';
         RestContext.request = request;
         // Call the method to test
