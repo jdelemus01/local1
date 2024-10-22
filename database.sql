@@ -18,7 +18,7 @@ CREATE TABLE
 
 --Tabla sobre actividades ofertadas
 CREATE TABLE
-    GUIA (
+    ACTIVIDAD (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
         duracion INT NOT NULL, -- Duración en minutos u horas, según se necesite
@@ -33,10 +33,10 @@ CREATE TABLE
 CREATE TABLE
     CONSUMO_ACTIVIDAD (
         consumidor_id INT NOT NULL,
-        guia_id INT NOT NULL,
-        PRIMARY KEY (consumidor_id, guia_id), -- Llave primaria compuesta
+        actividad_id INT NOT NULL,
+        PRIMARY KEY (consumidor_id, actividad_id), -- Llave primaria compuesta
         FOREIGN KEY (consumidor_id) REFERENCES CONSUMIDOR (id) ON DELETE CASCADE ON UPDATE CASCADE,
-        FOREIGN KEY (guia_id) REFERENCES GUIA (id) ON DELETE CASCADE ON UPDATE CASCADE
+        FOREIGN KEY (actividad_id) REFERENCES ACTIVIDAD (id) ON DELETE CASCADE ON UPDATE CASCADE
     );
 
 --Tabla de tipos de actividades
