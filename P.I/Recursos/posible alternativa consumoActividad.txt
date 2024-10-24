@@ -1,0 +1,30 @@
+@Entity
+@Table(name = "CONSUMO_ACTIVIDAD")
+public class ConsumoActividad {
+
+    @EmbeddedId
+    private ConsumoActividadId id;
+
+    @ManyToOne
+    @MapsId("consumidorId")
+    @JoinColumn(name = "consumidor_id", nullable = false, 
+                foreignKey = @ForeignKey(name = "fkConsumoActividadConsumidor"))
+    private Consumidor consumidor;
+
+    @ManyToOne
+    @MapsId("actividadId")
+    @JoinColumn(name = "actividad_id", nullable = false, 
+                foreignKey = @ForeignKey(name = "fkConsumoActividadActividad"))
+    private Actividad actividad;
+
+    // Getters and Setters
+}
+
+@Embeddable
+public class ConsumoActividadId implements Serializable {
+
+    private Long consumidorId;
+    private Long actividadId;
+
+    // hashCode, equals, Getters, and Setters
+}

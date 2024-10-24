@@ -1,0 +1,63 @@
+CREATE SCHEMA IF NOT EXISTS pInt;
+
+USE pInt;
+
+CREATE TABLE
+    IF NOT EXISTS USUARIO (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(100),
+        email VARCHAR(100),
+        rol ENUM ('OFE', 'CON', 'ADMIN') NOT NULL
+    );
+
+CREATE TABLE
+    IF NOT EXISTS TIPO (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(50) NOT NULL
+    );
+
+CREATE TABLE
+    IF NOT EXISTS CONSUMIDOR (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(50) NOT NULL,
+        apellido VARCHAR(50) NOT NULL,
+        fecha_nacimiento DATE NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        username VARCHAR(50) UNIQUE,
+        CONSTRAINT fkConsumidorUsuario FOREIGN KEY (username) REFERENCES USUARIO (username) ON DELETE CASCADE ON UPDATE CASCADE
+    );
+
+CREATE TABLE
+    IF NOT EXISTS OFERTANTE (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(50) NOT NULL,
+        apellido VARCHAR(50) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        username VARCHAR(50) UNIQUE,
+        CONSTRAINT fkOfertanteUsuario FOREIGN KEY (username) REFERENCES USUARIO (username) ON DELETE CASCADE ON UPDATE CASCADE
+    );
+
+CREATE TABLE
+    IF NOT EXISTS ACTIVIDAD (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        duracion INT NOT NULL,
+        precio DECIMAL(10, 2) NOT NULL,
+        aireLibre BOOLEAN NOT NULL,
+        fecha DATE NOT NULL,
+        mas18 BOOLEAN NOT NULL,
+        ofertante_id BIGINT NOT NULL,
+        tipo_id INT NOT NULL,
+        FOREIGN KEY (ofertante_id) REFERENCES OFERTANTE (id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (tipo_id) REFERENCES TIPO (id) ON DELETE CASCADE ON UPDATE CASCADE
+    );
+
+CREATE TABLE
+    IF NOT EXISTS CONSUMO_ACTIVIDAD (
+        consumidor_id BIGINT NOT NULL,
+        actividad_id BIGINT NOT NULL,
+        PRIMARY KEY (consumidor_id, actividad_id),
+        FOREIGN KEY (consumidor_id) REFERENCES CONSUMIDOR (id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (actividad_id) REFERENCES ACTIVIDAD (id) ON DELETE CASCADE ON UPDATE CASCADE
+    );
