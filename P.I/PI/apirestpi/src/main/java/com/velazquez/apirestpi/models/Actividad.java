@@ -29,7 +29,7 @@ public class Actividad implements Serializable {
 
     @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fecha;
 
     @Column(name = "mas18", nullable = false)

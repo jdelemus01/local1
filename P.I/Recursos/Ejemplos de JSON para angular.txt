@@ -1,0 +1,108 @@
+USUARIOS:
+	[
+    {
+        "id": 1,
+        "username": "usuario1",
+        "password": "hashed_password1",
+        "email": "usuario1@example.com",
+        "rol": "OFE"
+    },
+    {
+        "id": 2,
+        "username": "usuario2",
+        "password": "hashed_password2",
+        "email": "usuario2@example.com",
+        "rol": "CON"
+    }
+]
+
+
+TIPO:
+	[
+    {
+        "id": 1,
+        "nombre": "Deporte"
+    },
+    {
+        "id": 2,
+        "nombre": "Cultura"
+    }
+]
+
+
+CONSUMIDOR:
+	[
+    {
+        "id": 1,
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "fecha_nacimiento": "1990-05-10",
+        "email": "juan.perez@example.com",
+        "username": "usuario1"
+    },
+    {
+        "id": 2,
+        "nombre": "Ana",
+        "apellido": "García",
+        "fecha_nacimiento": "1988-11-20",
+        "email": "ana.garcia@example.com",
+        "username": "usuario2"
+    }
+]
+
+
+OFERTANTE:
+	[
+    {
+        "id": 1,
+        "nombre": "Carlos",
+        "apellido": "Lopez",
+        "email": "carlos.lopez@example.com",
+        "username": "usuario3"
+    },
+    {
+        "id": 2,
+        "nombre": "María",
+        "apellido": "Sánchez",
+        "email": "maria.sanchez@example.com",
+        "username": "usuario4"
+    }
+]
+
+ACTIVIDAD:
+	[
+    {
+        "id": 1,
+        "nombre": "Escalada",
+        "duracion": 120,
+        "precio": 25.50,
+        "aireLibre": true,
+        "fecha": "2024-10-15",
+        "mas18": false,
+        "ofertante_id": 1,
+        "tipo_id": 1
+    },
+    {
+        "id": 2,
+        "nombre": "Taller de pintura",
+        "duracion": 90,
+        "precio": 15.00,
+        "aireLibre": false,
+        "fecha": "2024-11-01",
+        "mas18": false,
+        "ofertante_id": 2,
+        "tipo_id": 2
+    }
+]
+CONSUMO_ACTIVIDAD ¿?:
+	[
+    {
+        "consumidor_id": 1,
+        "actividad_id": 1
+    },
+    {
+        "consumidor_id": 2,
+        "actividad_id": 2
+    }
+]
+

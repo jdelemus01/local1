@@ -23,7 +23,7 @@ public class Consumidor implements Serializable {
 
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fechaNacimiento;
 
     @Column(name = "email", nullable = false)

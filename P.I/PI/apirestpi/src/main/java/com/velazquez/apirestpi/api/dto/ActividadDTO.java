@@ -17,7 +17,7 @@ public class ActividadDTO implements Serializable {
 
     private boolean aireLibre;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fecha;
 
     private boolean mas18;

@@ -13,7 +13,7 @@ public class ConsumidorDTO implements Serializable {
 
     private String apellido;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fechaNacimiento;
 
     private String email;
