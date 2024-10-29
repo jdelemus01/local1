@@ -23,8 +23,11 @@ public class Ofertante implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
+    @Column(length = 50, unique = true)
+    private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(name = "fkOfertanteUsuario"), nullable = false)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL, orphanRemoval = true)

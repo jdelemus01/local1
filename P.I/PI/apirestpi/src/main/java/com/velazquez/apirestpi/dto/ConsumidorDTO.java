@@ -1,4 +1,4 @@
-package com.velazquez.apirestpi.api.dto;
+package com.velazquez.apirestpi.dto;
 
 import java.io.Serializable;
 import java.util.Date;

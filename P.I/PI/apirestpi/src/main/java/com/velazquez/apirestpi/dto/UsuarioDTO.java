@@ -1,4 +1,4 @@
-package com.velazquez.apirestpi.api.dto;
+package com.velazquez.apirestpi.dto;
 
 import java.io.Serializable;
 import com.velazquez.apirestpi.models.Rol;;
