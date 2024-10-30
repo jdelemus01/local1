@@ -21,8 +21,8 @@ public class Usuario implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "rol", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "rol", nullable = false)
     private Rol rol;
 
     public Long getId() {
