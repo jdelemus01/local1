@@ -29,11 +29,8 @@ public class Consumidor implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(length = 50, unique = true)
-    private String username;
-
     @ManyToOne
-    @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(name = "fkOfertanteUsuario"), nullable = false)
+    @JoinColumn(name="username")
     private Usuario usuario;
 
     private String rol = "CON";
