@@ -33,6 +33,7 @@ CREATE TABLE
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(50) NOT NULL,
         apellido VARCHAR(50) NOT NULL,
+        fecha_nacimiento DATE NOT NULL,
         email VARCHAR(100) NOT NULL,
         username VARCHAR(50) UNIQUE,
         CONSTRAINT fkOfertanteUsuario FOREIGN KEY (username) REFERENCES USUARIO (username) ON DELETE CASCADE ON UPDATE CASCADE

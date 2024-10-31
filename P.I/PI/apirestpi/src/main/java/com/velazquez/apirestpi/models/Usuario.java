@@ -3,8 +3,6 @@ package com.velazquez.apirestpi.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "USUARIO")
@@ -14,7 +12,7 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false, insertable=false, updatable=false)
+    @Column(name = "username", unique = true, nullable = false, insertable = false, updatable = false)
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -27,11 +25,11 @@ public class Usuario implements Serializable {
     @Column(name = "rol", nullable = false)
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Consumidor> consumidores = new HashSet<>();
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Consumidor consumidor;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Ofertante> ofertantes = new HashSet<>();
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Ofertante ofertante;
 
     public Long getId() {
         return id;

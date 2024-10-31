@@ -1,108 +1,168 @@
-USUARIOS:
-	[
+PARA USAR LOS EJEMPLOS DEL POST, PRIMERO HAYQ EU INSERTAR LOS USUARIOS QUE FALTARÍAN
+
+
+GETS:
+
+Actividad
+{
+  "id": 1,
+  "nombre": "Excursión en montaña",
+  "duracion": 3.5,
+  "precio": 50.0,
+  "aireLibre": true,
+  "fecha": "31-10-2024",
+  "mas18": false,
+  "ofertante": {
+    "id": 1,
+    "nombre": "Carlos",
+    "apellido": "Sanchez",
+    "email": "carlos.sanchez@correo.com",
+    "rol": "OFE"
+  },
+  "tipo": {
+    "id": 2,
+    "nombre": "Aventura"
+  }
+}
+
+
+(Tipo)
+{
+  "id": 2,
+  "nombre": "Aventura",
+  "actividades": [
     {
-        "id": 1,
-        "username": "usuario1",
-        "password": "hashed_password1",
-        "email": "usuario1@example.com",
-        "rol": "OFE"
-    },
-    {
-        "id": 2,
-        "username": "usuario2",
-        "password": "hashed_password2",
-        "email": "usuario2@example.com",
-        "rol": "CON"
+      "id": 1,
+      "nombre": "Excursión en montaña"
     }
-]
+  ]
+}
+
+(ConsumoActividad)
+{
+  "consumidor": {
+    "id": 1,
+    "nombre": "Ana",
+    "apellido": "Gómez"
+  },
+  "actividad": {
+    "id": 1,
+    "nombre": "Excursión en montaña",
+    "duracion": 3.5
+  }
+}
 
 
-TIPO:
-	[
-    {
-        "id": 1,
-        "nombre": "Deporte"
-    },
-    {
-        "id": 2,
-        "nombre": "Cultura"
-    }
-]
+(Usuario)
+{
+  "id": 1,
+  "username": "maria2024",
+  "email": "maria@example.com",
+  "rol": "ADMIN",
+  "consumidor": {
+    "id": 2,
+    "nombre": "Ana",
+    "apellido": "Gómez"
+  },
+  "ofertante": null
+}
 
 
-CONSUMIDOR:
-	[
-    {
-        "id": 1,
-        "nombre": "Juan",
-        "apellido": "Pérez",
-        "fecha_nacimiento": "1990-05-10",
-        "email": "juan.perez@example.com",
-        "username": "usuario1"
-    },
-    {
-        "id": 2,
-        "nombre": "Ana",
-        "apellido": "García",
-        "fecha_nacimiento": "1988-11-20",
-        "email": "ana.garcia@example.com",
-        "username": "usuario2"
-    }
-]
+(Ofertante)
+{
+  "id": 1,
+  "nombre": "Carlos",
+  "apellido": "Sanchez",
+  "fechaNacimiento": "15-03-1990",
+  "email": "carlos.sanchez@correo.com",
+  "usuario": {
+    "username": "carlos123",
+    "rol": "OFE"
+  }
+}
 
 
-OFERTANTE:
-	[
-    {
-        "id": 1,
-        "nombre": "Carlos",
-        "apellido": "Lopez",
-        "email": "carlos.lopez@example.com",
-        "username": "usuario3"
-    },
-    {
-        "id": 2,
-        "nombre": "María",
-        "apellido": "Sánchez",
-        "email": "maria.sanchez@example.com",
-        "username": "usuario4"
-    }
-]
+(Consumidor)
+{
+  "id": 2,
+  "nombre": "Ana",
+  "apellido": "Gómez",
+  "fechaNacimiento": "15-03-1990",
+  "email": "ana.gomez@correo.com",
+  "usuario": {
+    "username": "ana90",
+    "rol": "CON"
+  }
+}
 
-ACTIVIDAD:
-	[
-    {
-        "id": 1,
-        "nombre": "Escalada",
-        "duracion": 120,
-        "precio": 25.50,
-        "aireLibre": true,
-        "fecha": "2024-10-15",
-        "mas18": false,
-        "ofertante_id": 1,
-        "tipo_id": 1
-    },
-    {
-        "id": 2,
-        "nombre": "Taller de pintura",
-        "duracion": 90,
-        "precio": 15.00,
-        "aireLibre": false,
-        "fecha": "2024-11-01",
-        "mas18": false,
-        "ofertante_id": 2,
-        "tipo_id": 2
-    }
-]
-CONSUMO_ACTIVIDAD ¿?:
-	[
-    {
-        "consumidor_id": 1,
-        "actividad_id": 1
-    },
-    {
-        "consumidor_id": 2,
-        "actividad_id": 2
-    }
-]
+
+
+POSTS:
+
+(Actividad)
+{
+  "nombre": "Excursión en montaña",
+  "duracion": 3.5,
+  "precio": 50.0,
+  "aireLibre": true,
+  "fecha": "31-10-2024",
+  "mas18": false,
+  "ofertante": {
+    "id": 1
+  },
+  "tipo": {
+    "id": 2
+  }
+}
+
+
+(Tipo)
+{
+  "nombre": "Aventura"
+}
+
+
+(ConsumoActividad)
+{
+  "consumidor": {
+    "id": 1
+  },
+  "actividad": {
+    "id": 1
+  }
+}
+
+
+(Usuario)
+{
+  "username": "maria2024",
+  "password": "contrasenaSegura",
+  "email": "maria@example.com",
+  "rol": "ADMIN"
+}
+
+
+(Ofertante)
+{
+  "nombre": "Carlos",
+  "apellido": "Sanchez",
+  "email": "carlos.sanchez@correo.com",
+  "usuario": {
+    "username": "carlos123"
+  },
+  "rol": "OFE"
+}
+
+
+(Consumidor)
+{
+  "nombre": "Ana",
+  "apellido": "Gómez",
+  "fechaNacimiento": "15-03-1990",
+  "email": "ana.gomez@correo.com",
+  "usuario": {
+    "username": "ana90"
+  },
+  "rol": "CON"
+}
 

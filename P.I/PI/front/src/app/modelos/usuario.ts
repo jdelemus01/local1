@@ -1,9 +1,11 @@
+import { Consumidor } from "./consumidor";
+import { Ofertante } from "./ofertante";
 import { Rol } from "./rol";
 
 export interface Usuario {
     id: number,
     username: string, 
-    password: string,
     email: string,
-    rol: Rol
+    consumidor?: Consumidor,
+    ofertante?: Ofertante
 }

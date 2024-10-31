@@ -1,0 +1,27 @@
+<table>
+    <thead>
+        <th>Nombre de usuario</th>
+        <th>Email</th>
+        <th>Role</th>
+    </thead>
+
+    <tbody>
+        @for (usuario of usuarios; track $index) {
+            <tr>
+                <td>{{usuario.username}}</td>
+                <td>{{usuario.email}}</td>
+                @if (usuario.consumidor != null) {
+                    @if (usuario.ofertante != null) {
+                        <td>Doble</td>
+                    } @else {
+                        <td>Consumidor</td>
+                    }
+                } @else {
+                    <td>Ofertante</td>
+                }
+                <td><button routerLink="/usuarioForm/{{usuario.id}}"></button></td>
+                <td><button></button></td>
+            </tr>
+        }
+    </tbody>
+</table>

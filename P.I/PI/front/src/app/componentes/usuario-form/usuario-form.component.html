@@ -1,0 +1,20 @@
+<h1>Usuario {{idUsuario}}</h1>
+
+<form #formularioUsuario ="ngForm" (ngSubmit)="modificarUsuario(formularioUsuario.value)">
+
+    <div style="visibility: visible;">
+        <label>ID:</label>
+        <input type="number" name="id" readonly required [(ngModel)]="usuario.id">
+    </div>
+    <div>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required [(ngModel)]="usuario.username">
+    </div>
+    <div>
+        <label>Apellidos:</label>
+        <input type="text" name="apellidos" required [(ngModel)]="usuario.email">
+    </div>
+
+    <button type="submit" [disabled]="!formularioUsuario.valid">Paki</button>
+    <button type="button" (click)="volver()">Cancelar</button>
+</form>

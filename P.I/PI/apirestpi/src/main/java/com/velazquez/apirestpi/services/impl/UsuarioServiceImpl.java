@@ -1,9 +1,12 @@
 package com.velazquez.apirestpi.services.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.repositories.UsuarioRepositorio;
 import com.velazquez.apirestpi.services.UsuarioService;
@@ -14,6 +17,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     private final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
     @Autowired UsuarioRepositorio usuarioRepositorio;
+
+    public List<Usuario> getAllUsuarios(){
+        return usuarioRepositorio.findAll();
+    }
 
     @Override
     public Usuario insertUsuario(Usuario usuario) {

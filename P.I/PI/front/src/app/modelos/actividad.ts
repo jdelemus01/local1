@@ -6,7 +6,8 @@ export interface Actividad {
     nombre: string,
     duracion: number,
     precio: number,
-    airLibre: boolean,
+    aireLibre: boolean,
+    fecha: Date
     mas18: boolean,
     ofertante: Ofertante,
     tipo: Tipo

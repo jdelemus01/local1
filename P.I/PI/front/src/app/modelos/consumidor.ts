@@ -5,6 +5,5 @@ export interface Consumidor {
     nombre: string,
     apellido: string,
     fechaNacimiento: Date,
-    email: string, 
     usuario: Usuario
 }
