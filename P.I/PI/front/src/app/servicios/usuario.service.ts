@@ -14,6 +14,7 @@ export class UsuarioService {
   getAllUsuarios(){
     let peticion:string=`${this.URL}/allUsuarios`;
     console.log(peticion);
+    
     return this.http.get<any[]>(peticion);
   }
 }

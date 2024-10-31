@@ -52,7 +52,6 @@ public class ActividadServiceImpl implements ActividadService {
         if (actividad != null) {
             actividadRepositorio.delete(actividad);
         }
-        log.info("Ha sido borrado: " + actividad.toString());
     }
 
     @Override

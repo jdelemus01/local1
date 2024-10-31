@@ -15,12 +15,16 @@
                 <td>{{act.duracion}}</td>
                 <td>{{act.precio}}</td>
                 <td>{{act.fecha | date}}</td>
+                <td>{{act.ofertante.usuario.username}}</td>
+                <td>{{act.tipo.nombre}}</td>
+                <td><button routerLink="">Editar</button></td>
+                <td><button (click)="borrarActividad(act.id)">Borrar</button></td>
             </tr>
         }
     </tbody>
 
     <tfoot>
-        
+        <button>Añadir Actividad</button>
     </tfoot>
 
 </table>
