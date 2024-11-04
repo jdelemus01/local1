@@ -15,17 +15,22 @@ import { ActividadService } from '../../servicios/actividad.service';
   styleUrl: './lista-actividades.component.css',
 })
 export class ListaActividadesComponent {
+  
+  //Variables-----------------------------------------------------------------------------------------------
   public ofertante: Ofertante = <Ofertante>{};
   public tipo: Tipo = <Tipo>{};
-
   public acts: Actividad[] = [];
 
+
+  //Constructor-----------------------------------------------------------------------------------------------
   constructor(private service: ActividadService) {
     this.service.getAllActividades().subscribe((data) => {
       this.acts = data;
     });
   }
 
+
+  //Métodos-----------------------------------------------------------------------------------------------
   public borrarActividad(id: number) {
     if (confirm('¿Seguro de que desea borrar a ' + id)) {
       this.service.deleteActividad(id).subscribe({

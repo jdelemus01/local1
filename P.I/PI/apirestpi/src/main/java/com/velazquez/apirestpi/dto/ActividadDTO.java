@@ -5,6 +5,9 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.velazquez.apirestpi.models.Ofertante;
+import com.velazquez.apirestpi.models.Tipo;
+
 public class ActividadDTO implements Serializable {
 
     private Long id;
@@ -22,13 +25,14 @@ public class ActividadDTO implements Serializable {
 
     private boolean mas18;
 
-    private Long tipoId;
+    private Tipo tipo;
 
-    private Long ofertanteId;
+    private Ofertante ofertante;
 
+    
 
     public ActividadDTO(Long id, String nombre, Double duracion, Double precio, boolean aireLibre, Date fecha,
-            boolean mas18, Long tipoId, Long ofertanteId) {
+            boolean mas18, Tipo tipo, Ofertante ofertante) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -36,11 +40,13 @@ public class ActividadDTO implements Serializable {
         this.aireLibre = aireLibre;
         this.fecha = fecha;
         this.mas18 = mas18;
-        this.tipoId = tipoId;
-        this.ofertanteId = ofertanteId;
+        this.tipo = tipo;
+        this.ofertante = ofertante;
     }
 
-    
+    public ActividadDTO() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -97,27 +103,89 @@ public class ActividadDTO implements Serializable {
         this.mas18 = mas18;
     }
 
-    public Long getTipoId() {
-        return tipoId;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setTipoId(Long tipoId) {
-        this.tipoId = tipoId;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
-    public Long getOfertanteId() {
-        return ofertanteId;
+    public Ofertante getOfertante() {
+        return ofertante;
     }
 
-    public void setOfertanteId(Long ofertanteId) {
-        this.ofertanteId = ofertanteId;
+    public void setOfertante(Ofertante ofertante) {
+        this.ofertante = ofertante;
     }
-
 
     @Override
-    public String toString() {
-        return "ActividadDTO [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + ", precio=" + precio
-                + ", aireLibre=" + aireLibre + ", fecha=" + fecha + ", mas18=" + mas18 + ", tipoId=" + tipoId
-                + ", ofertanteId=" + ofertanteId + "]";
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = prime * result + ((duracion == null) ? 0 : duracion.hashCode());
+        result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+        result = prime * result + (aireLibre ? 1231 : 1237);
+        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+        result = prime * result + (mas18 ? 1231 : 1237);
+        result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+        result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
+        return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ActividadDTO other = (ActividadDTO) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
+            return false;
+        if (duracion == null) {
+            if (other.duracion != null)
+                return false;
+        } else if (!duracion.equals(other.duracion))
+            return false;
+        if (precio == null) {
+            if (other.precio != null)
+                return false;
+        } else if (!precio.equals(other.precio))
+            return false;
+        if (aireLibre != other.aireLibre)
+            return false;
+        if (fecha == null) {
+            if (other.fecha != null)
+                return false;
+        } else if (!fecha.equals(other.fecha))
+            return false;
+        if (mas18 != other.mas18)
+            return false;
+        if (tipo == null) {
+            if (other.tipo != null)
+                return false;
+        } else if (!tipo.equals(other.tipo))
+            return false;
+        if (ofertante == null) {
+            if (other.ofertante != null)
+                return false;
+        } else if (!ofertante.equals(other.ofertante))
+            return false;
+        return true;
+    }
+
+
+    
 }

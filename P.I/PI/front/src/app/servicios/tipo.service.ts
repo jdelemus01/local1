@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class OfertanteService {
+export class TipoService {
 
-  private URL:string = "http://localhost:8084/ofertante";
+  private URL: string = "http://localhost:8084/tipo";
+  
+  constructor(private http: HttpClient) { }
 
-  constructor(private http:HttpClient) {}
-
-  getAllOfertantes() {
-    let peticion = `${this.URL}/allOfertantes`;
+  getAllTipos(){
+    let peticion:string = `${this.URL}/allTipos`;
     console.log(peticion);
 
     return this.http.get<any[]>(peticion);

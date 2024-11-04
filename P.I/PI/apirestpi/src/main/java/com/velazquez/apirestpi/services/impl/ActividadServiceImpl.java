@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.velazquez.apirestpi.dto.ActividadDTO;
 import com.velazquez.apirestpi.models.Actividad;
 import com.velazquez.apirestpi.repositories.ActividadRepositorio;
 import com.velazquez.apirestpi.services.ActividadService;
@@ -15,36 +16,46 @@ import com.velazquez.apirestpi.services.ActividadService;
 @Service
 public class ActividadServiceImpl implements ActividadService {
 
+    
     private final Logger log = LoggerFactory.getLogger(ActividadServiceImpl.class);
-
-
+    
+    
     @Autowired
     ActividadRepositorio actividadRepositorio;
-
+    
     @Override
     public Actividad getActividadById(Long id) {
         log.info("getActividadById devuelve: " + actividadRepositorio.getReferenceById(id).toString());
         return actividadRepositorio.getReferenceById(id);
     }
-
+    
     @Override
     public List<Actividad> getActividadesAireLibre(boolean aireLibre) {
         log.info("getActividadesAireLibre devuelve: " + actividadRepositorio.findByAireLibre(aireLibre).toString());
         return actividadRepositorio.findByAireLibre(aireLibre);
     }
-
+    
     @Override
     public List<Actividad> getActividadesmas18(boolean mas18) {
         log.info("getActividadesmas18 devuelve: " + actividadRepositorio.findByAireLibre(mas18).toString());
         return actividadRepositorio.findByMas18(mas18);
     }
-
+    
     @Override
     public List<Actividad> getAllActividades() {
         log.info("getAllActividades devuelve: " + actividadRepositorio.findAll().toString());
         return actividadRepositorio.findAll();
     }
-
+    
+    @Override
+    public ActividadDTO getActividadByIdDTO(Long id) {
+        Actividad actividad = actividadRepositorio.getReferenceById(id);
+        ActividadDTO actDto = new ActividadDTO();
+        if(actividad != null){
+            actDto = new ActividadDTO(id, actividad.getNombre(), actividad.getDuracion(), actividad.getPrecio(), actividad.isAireLibre(), actividad.getFecha(), actividad.isMas18(), actividad.getTipo(), actividad.getOfertante());
+        }
+        return actDto;
+    }
     @Override
     public void deleteActividad(Long id) {
         Actividad actividad = actividadRepositorio.getReferenceById(id);

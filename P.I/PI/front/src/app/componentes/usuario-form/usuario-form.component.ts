@@ -12,14 +12,19 @@ import { Usuario } from '../../modelos/usuario';
 })
 export class UsuarioFormComponent {
 
+  //Variables-----------------------------------------------------------------------------------------------
   public idUsuario: number;
   public usuario: Usuario = <Usuario>{};
   
+
+  //Constructor-----------------------------------------------------------------------------------------------
   constructor(private ruta: Router, private rutaAct:ActivatedRoute){
     this.idUsuario = this.rutaAct.snapshot.params["id"];
     this.usuario.id = this.idUsuario; 
   }
 
+
+  //Métodos-----------------------------------------------------------------------------------------------
   modificarUsuario(usuario: Usuario){
     this.ruta.navigate(["usuarios"]);
   }

@@ -11,8 +11,11 @@ import { UsuarioService } from '../../servicios/usuario.service';
   styleUrl: './lista-usuarios.component.css'
 })
 export class ListaUsuariosComponent {
+
+  //Variables-----------------------------------------------------------------------------------------------
   public usuarios : Usuario[] = [];
 
+  //Constructor-----------------------------------------------------------------------------------------------
   constructor(private service:UsuarioService){
     this.service.getAllUsuarios().subscribe(
       data => {
@@ -22,4 +25,6 @@ export class ListaUsuariosComponent {
     )
   }
 
+
+  //Métodos-----------------------------------------------------------------------------------------------
 }
