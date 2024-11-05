@@ -39,8 +39,8 @@ public class ActividadController {
     }
 
     @GetMapping("/getActividad/{id}")
-    public ActividadDTO getActividad(@PathVariable("id") Long id) {
-        return actividadService.getActividadByIdDTO(id);
+    public Actividad getActividad(@PathVariable("id") Long id) {
+        return actividadService.getActividadById(id);
     }
 
     @DeleteMapping("/borrarActividad/{id}")

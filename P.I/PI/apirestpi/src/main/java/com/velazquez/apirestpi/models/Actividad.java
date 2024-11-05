@@ -35,11 +35,11 @@ public class Actividad implements Serializable {
     @Column(name = "mas18", nullable = false)
     private boolean mas18;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ofertante_id", nullable = false)
     Ofertante ofertante;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tipo_id", nullable = false)
     Tipo tipo;
 

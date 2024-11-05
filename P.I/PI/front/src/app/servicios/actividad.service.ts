@@ -29,7 +29,7 @@ export class ActividadService {
     let peticion = `${this.URL}/getActividad/`+id;
     console.log(peticion);
 
-    return this.http.get<any>(peticion);
+    return this.http.get<Actividad>(peticion);
   }
 
   insertActividad(actIns: Actividad){
@@ -41,7 +41,7 @@ export class ActividadService {
 
   updateActividad(actUpdate: Actividad){
     let peticion = `${this.URL}/modificarActividad/`+actUpdate.id;
-    console.log(peticion);
+    console.log("El método UPDATE ACTIVIDAD RECIBE: " , peticion, actUpdate);
 
     return this.http.put<any[]>(peticion, actUpdate);
   }
