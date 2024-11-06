@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Tipo } from '../modelos/tipo';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,12 @@ export class TipoService {
     console.log(peticion);
 
     return this.http.get<any[]>(peticion);
+  }
+
+  getTipoById(id: number){
+    let peticion = `${this.URL}/getTipo/`+id;
+    console.log(peticion);
+
+    return this.http.get<Tipo>(peticion);
   }
 }

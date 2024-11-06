@@ -1,20 +1,39 @@
-<h1>Usuario {{idUsuario}}</h1>
+<button (click)="mostrarFormConsumidor()">Formulario de Consumidor</button>
+<button (click)="mostrarFormOfertante()">Formulario de Ofertante</button>
 
-<form #formularioUsuario ="ngForm" (ngSubmit)="modificarUsuario(formularioUsuario.value)">
+<div class="form-control">
+    <form #formularioUsuario ="ngForm" (ngSubmit)="registrarConsumidor()">
+        <div style="visibility: visible;">
+            <label>ID:</label>
+            <input type="number" name="id" required [(ngModel)]="consumidor.id">
+        </div>
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" required [(ngModel)]="consumidor.nombre">
+        </div>
+        <div>
+            <label>Apellidos:</label>
+            <input type="text" name="apellido" required [(ngModel)]="consumidor.apellido">
+        </div>
+        <div>
+            <label>Fecha de nacimiento:</label>
+            <input type="date" name="fechaNacimiento" required [(ngModel)]="consumidor.fechaNacimiento">
+        </div>
+        <div>
+            <label>Nombre de Usuario:</label>
+            <input type="text" name="username" required [(ngModel)]="usuario.username">
+        </div>
+        <div>
+            <label>Contraseña:</label>
+            <input type="password" name="password" required [(ngModel)]="consumidor.password">
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" required [(ngModel)]="usuario.email">
+        </div>
+        <button type="submit" [disabled]="!formularioUsuario.valid">Paki</button>
+        <button type="button" routerLink="adminActs">Cancelar</button>
+    </form>
+</div>
 
-    <div style="visibility: visible;">
-        <label>ID:</label>
-        <input type="number" name="id" readonly required [(ngModel)]="usuario.id">
-    </div>
-    <div>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required [(ngModel)]="usuario.username">
-    </div>
-    <div>
-        <label>Apellidos:</label>
-        <input type="text" name="apellido" required [(ngModel)]="usuario.email">
-    </div>
 
-    <button type="submit" [disabled]="!formularioUsuario.valid">Paki</button>
-    <button type="button" (click)="volver()">Cancelar</button>
-</form>

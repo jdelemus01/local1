@@ -29,7 +29,7 @@ export class ActividadService {
     let peticion = `${this.URL}/getActividad/`+id;
     console.log(peticion);
 
-    return this.http.get<Actividad>(peticion);
+    return this.http.get<any>(peticion);
   }
 
   insertActividad(actIns: Actividad){

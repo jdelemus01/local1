@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <th>Nombre de usuario</th>
+        <th>Email</th>
+    </thead>
+
+    <tbody>
+        @for (usuario of usuarios; track $index) {
+            <tr>
+                <td>{{usuario.username}}</td>
+                <td>{{usuario.email}}</td>
+                <td><button routerLink="/usuarioForm/{{usuario.id}}">Editar</button></td>
+                <td><button>Borrar</button></td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tfoot>
+            <button routerLink="">Nos Fuimo</button>
+        </tfoot>
+    </tfoot>
+</table>

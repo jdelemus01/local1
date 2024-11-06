@@ -1,6 +1,7 @@
 package com.velazquez.apirestpi.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +27,8 @@ public class OfertanteServiceImpl implements OfertanteService {
     }
 
     @Override
-    public Ofertante getOfertanteById(Long id) {
-        log.info("El método getOfertanteById devuelve: " + ofertanteRepositorio.getReferenceById(id));
-        return ofertanteRepositorio.getReferenceById(id);
+    public Optional<Ofertante> getOfertanteById(Long id) {
+        return ofertanteRepositorio.findById(id);
     }
 
     @Override
@@ -65,4 +65,27 @@ public class OfertanteServiceImpl implements OfertanteService {
         return ofertanteIns;
     }
 
+    
+
 }
+
+/*
+ * @Override
+ * public Optional<OfertanteDTO> getOfertanteById(Long id) {
+ * Optional<Ofertante> ofertanteGet = ofertanteRepositorio.findById(id);
+ * 
+ * return ofertanteGet.map(ofertante -> {
+ * List<ActividadDTO> actividades = ofertante.getActividades().stream().map(
+ * actividad -> new ActividadDTO(actividad.getId(), actividad.getNombre(),
+ * actividad.getDuracion(),
+ * actividad.getPrecio(),
+ * actividad.isAireLibre(), actividad.getFecha(), actividad.isMas18(),
+ * ofertante.getId(),
+ * actividad.getOfertante().getId()))
+ * .collect(Collectors.toList());
+ * return new OfertanteDTO(ofertante.getId(), ofertante.getNombre(),
+ * ofertante.getApellido(),
+ * ofertante.getEmail(), ofertante.getUsuario().getUsername(), actividades);
+ * });
+ * }
+ */

@@ -1,12 +1,16 @@
 package com.velazquez.apirestpi.services.impl;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.velazquez.apirestpi.dto.ActividadDTO;
+import com.velazquez.apirestpi.dto.TipoDTO;
 import com.velazquez.apirestpi.models.Tipo;
 import com.velazquez.apirestpi.repositories.TipoRepositorio;
 import com.velazquez.apirestpi.services.TipoService;
@@ -26,9 +30,19 @@ public class TipoServiceImpl implements TipoService {
     }
 
     @Override
-    public Tipo getTipoById(Long id) {
-        log.info("El método getTipoById ha recibido: " + tipoRepositorio.getReferenceById(id));
-        return tipoRepositorio.getReferenceById(id);
+    public Optional<TipoDTO> getTipoById(Long id) {
+        Optional<Tipo> tipoGet = tipoRepositorio.findById(id);
+
+        //Esta mierda de aquí hay que entenderla
+            return tipoGet.map(tipo -> {
+                List<ActividadDTO> actividades = tipo.getActividades().stream().map(
+                        actividad -> new ActividadDTO(actividad.getId(), actividad.getNombre(), actividad.getDuracion(),
+                                actividad.getPrecio(),
+                                actividad.isAireLibre(), actividad.getFecha(), actividad.isMas18(), tipo.getId(),
+                                actividad.getOfertante().getId()))
+                        .collect(Collectors.toList());
+                return new TipoDTO(tipo.getId(), tipo.getNombre(), actividades);
+            });
     }
 
     @Override

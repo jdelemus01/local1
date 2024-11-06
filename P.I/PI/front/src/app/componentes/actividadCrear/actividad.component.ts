@@ -48,10 +48,6 @@ export class ActividadComponent {
     console.log('Actividad a insertar: ' + actIns);
 
     this.actividadService.insertActividad(actIns).subscribe();
-    this.ruta.navigate(['actividades']);
-  }
-
-  public volver() {
-    this.ruta.navigate(['actividades']);
+    //this.ruta.navigate(['adminActs']);
   }
 }

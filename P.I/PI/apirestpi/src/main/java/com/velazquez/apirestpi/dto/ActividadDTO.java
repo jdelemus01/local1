@@ -5,9 +5,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.velazquez.apirestpi.models.Ofertante;
-import com.velazquez.apirestpi.models.Tipo;
-
 public class ActividadDTO implements Serializable {
 
     private Long id;
@@ -25,14 +22,12 @@ public class ActividadDTO implements Serializable {
 
     private boolean mas18;
 
-    private Tipo tipo;
+    private Long tipoDTO;
 
-    private Ofertante ofertante;
-
-    
+    private Long ofertanteDTO;
 
     public ActividadDTO(Long id, String nombre, Double duracion, Double precio, boolean aireLibre, Date fecha,
-            boolean mas18, Tipo tipo, Ofertante ofertante) {
+            boolean mas18, Long tipoDTO, Long ofertanteDTO) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -40,8 +35,8 @@ public class ActividadDTO implements Serializable {
         this.aireLibre = aireLibre;
         this.fecha = fecha;
         this.mas18 = mas18;
-        this.tipo = tipo;
-        this.ofertante = ofertante;
+        this.tipoDTO = tipoDTO;
+        this.ofertanteDTO = ofertanteDTO;
     }
 
     public ActividadDTO() {
@@ -103,20 +98,22 @@ public class ActividadDTO implements Serializable {
         this.mas18 = mas18;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    
+
+    public Long getTipoDTO() {
+        return tipoDTO;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipoDTO(Long tipoDTO) {
+        this.tipoDTO = tipoDTO;
     }
 
-    public Ofertante getOfertante() {
-        return ofertante;
+    public Long getOfertanteDTO() {
+        return ofertanteDTO;
     }
 
-    public void setOfertante(Ofertante ofertante) {
-        this.ofertante = ofertante;
+    public void setOfertanteDTO(Long ofertanteDTO) {
+        this.ofertanteDTO = ofertanteDTO;
     }
 
     @Override
@@ -130,8 +127,8 @@ public class ActividadDTO implements Serializable {
         result = prime * result + (aireLibre ? 1231 : 1237);
         result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
         result = prime * result + (mas18 ? 1231 : 1237);
-        result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-        result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
+        result = prime * result + ((tipoDTO == null) ? 0 : tipoDTO.hashCode());
+        result = prime * result + ((ofertanteDTO == null) ? 0 : ofertanteDTO.hashCode());
         return result;
     }
 
@@ -173,19 +170,25 @@ public class ActividadDTO implements Serializable {
             return false;
         if (mas18 != other.mas18)
             return false;
-        if (tipo == null) {
-            if (other.tipo != null)
+        if (tipoDTO == null) {
+            if (other.tipoDTO != null)
                 return false;
-        } else if (!tipo.equals(other.tipo))
+        } else if (!tipoDTO.equals(other.tipoDTO))
             return false;
-        if (ofertante == null) {
-            if (other.ofertante != null)
+        if (ofertanteDTO == null) {
+            if (other.ofertanteDTO != null)
                 return false;
-        } else if (!ofertante.equals(other.ofertante))
+        } else if (!ofertanteDTO.equals(other.ofertanteDTO))
             return false;
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "ActividadDTO [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + ", precio=" + precio
+                + ", aireLibre=" + aireLibre + ", fecha=" + fecha + ", mas18=" + mas18 + ", tipoDTO=" + tipoDTO
+                + ", ofertanteDTO=" + ofertanteDTO + "]";
+    }
 
-    
+        
 }

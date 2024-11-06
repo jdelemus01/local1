@@ -1,6 +1,7 @@
 package com.velazquez.apirestpi.controllers.ejemplo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +12,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.velazquez.apirestpi.dto.ActividadDTO;
 import com.velazquez.apirestpi.models.Actividad;
 import com.velazquez.apirestpi.services.impl.ActividadServiceImpl;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.velazquez.apirestpi.mappers.Mapper;
 
 
 
@@ -33,14 +34,23 @@ public class ActividadController {
     @Autowired
     private ActividadServiceImpl actividadService;
 
+    @Autowired
+    private Mapper<Actividad, ActividadDTO> actMapper;
+
     @GetMapping("/allActividades")
     public List<Actividad> getAllActividades() {
         return actividadService.getAllActividades();
     }
 
     @GetMapping("/getActividad/{id}")
-    public Actividad getActividad(@PathVariable("id") Long id) {
-        return actividadService.getActividadById(id);
+    public ResponseEntity<Actividad> getActividad(@PathVariable Long id){
+        Optional<Actividad> actGet = actividadService.getActividadById(id);
+
+        if(!actGet.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(actGet.get(), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/borrarActividad/{id}")
@@ -55,9 +65,11 @@ public class ActividadController {
     }
     
 
+    
+    /*
     @PutMapping("modificarActividad/{id}")
     public Actividad putMethodName(@PathVariable Long id, @RequestBody ActividadDTO actividadUp) {
-        Actividad actUpdate = actividadService.getActividadById(id);
+        Optional<Actividad> actUpdate = actividadService.getActividadById(id);
 
         if(actUpdate == null){
             log.error("Esta actividad no está en la base de datos");
@@ -73,10 +85,8 @@ public class ActividadController {
             actUpdate.setOfertante(actividadUp.getOfertante());
             actUpdate.setTipo(actividadUp.getTipo());
 
-            return actividadService.updateActividad(actUpdate);
-            
-            
+            return actividadService.updateActividad(actUpdate); 
         }
-
     }
+     */
 }

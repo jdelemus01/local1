@@ -1,35 +1,42 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { Consumidor } from '../../modelos/consumidor';
 import { Usuario } from '../../modelos/usuario';
 
 @Component({
   selector: 'app-usuario-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './usuario-form.component.html',
-  styleUrl: './usuario-form.component.css'
+  styleUrl: './usuario-form.component.css',
 })
 export class UsuarioFormComponent {
-
   //Variables-----------------------------------------------------------------------------------------------
-  public idUsuario: number;
-  public usuario: Usuario = <Usuario>{};
-  
+  public mostrarCons: boolean = false;
+  public mostrarOfer: boolean = false;
+  public usuario : Usuario = <Usuario>{};
+  public consumidor : Consumidor = <Consumidor>{};
 
   //Constructor-----------------------------------------------------------------------------------------------
-  constructor(private ruta: Router, private rutaAct:ActivatedRoute){
-    this.idUsuario = this.rutaAct.snapshot.params["id"];
-    this.usuario.id = this.idUsuario; 
+  constructor(
+    private ar: ActivatedRoute, 
+    private ruta: Router
+  ) {
+    
   }
-
 
   //Métodos-----------------------------------------------------------------------------------------------
-  modificarUsuario(usuario: Usuario){
-    this.ruta.navigate(["usuarios"]);
+  mostrarFormConsumidor() {
+    this.mostrarCons = !this.mostrarCons;
   }
 
-  volver(){
-    this.ruta.navigate(["usuarios"]);
+  mostrarFormOfertante() {
+    this.mostrarOfer = !this.mostrarOfer;
+  }
+
+  registrarConsumidor() {
+    console.log(this.consumidor, this.usuario);
+    this.ruta.navigate(['']);
   }
 }

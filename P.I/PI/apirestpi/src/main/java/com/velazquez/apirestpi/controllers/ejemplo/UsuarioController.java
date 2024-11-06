@@ -1,6 +1,6 @@
 package com.velazquez.apirestpi.controllers.ejemplo;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.velazquez.apirestpi.dto.ActividadDTO;
+import com.velazquez.apirestpi.dto.UsuarioDTO;
 import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
 
 
@@ -27,6 +29,4 @@ public class UsuarioController {
      public ResponseEntity<?> allUsuarios() {
          return new ResponseEntity<>(usuarioService.getAllUsuarios(), HttpStatus.OK);
      }
-     
-    
 }

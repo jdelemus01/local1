@@ -31,7 +31,6 @@ public class Consumidor implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "username")
-    @MapsId
     private Usuario usuario;
 
     private String rol = "CON";

@@ -33,7 +33,6 @@ public class Ofertante implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "username")
-    @MapsId
     private Usuario usuario;
 
     @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL, orphanRemoval = true)

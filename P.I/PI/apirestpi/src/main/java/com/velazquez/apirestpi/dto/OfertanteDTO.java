@@ -1,6 +1,7 @@
 package com.velazquez.apirestpi.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class OfertanteDTO implements Serializable {
 
@@ -14,15 +15,17 @@ public class OfertanteDTO implements Serializable {
 
     private String username;
 
+    private List<ActividadDTO> actividades;
 
-    public OfertanteDTO(Long id, String nombre, String apellido, String email, String username) {
+    public OfertanteDTO(Long id, String nombre, String apellido, String email, String username,
+            List<ActividadDTO> actividades) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.username = username;
+        this.actividades = actividades;
     }
-
 
     public Long getId() {
         return id;
@@ -64,11 +67,17 @@ public class OfertanteDTO implements Serializable {
         this.username = username;
     }
 
+    public List<ActividadDTO> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<ActividadDTO> actividades) {
+        this.actividades = actividades;
+    }
 
     @Override
     public String toString() {
         return "Ofertante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
                 + ", username=" + username + "]";
     }
-
 }

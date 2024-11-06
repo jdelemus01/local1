@@ -1,25 +1,18 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './componentes/home/home.component';
-import { ListaActividadesComponent } from './componentes/lista-actividades/lista-actividades.component';
-import { ListaUsuariosComponent } from './componentes/lista-usuarios/lista-usuarios.component';
+import { ListaActividadesComponent } from './componentes/admin-actividades/lista-actividades.component';
+import { ListaUsuariosComponent } from './componentes/admin-usuarios/lista-usuarios.component';
 import { LoginComponent } from './componentes/login/login.component';
-import { ActividadFormComponent } from './componentes/actividad-formMod/actividad-form.component';
 import { UsuarioFormComponent } from './componentes/usuario-form/usuario-form.component';
 import { ActividadComponent } from './componentes/actividadCrear/actividad.component';
-import { UsuarioComponent } from './componentes/usuario/usuario.component';
 
 export const routes: Routes = 
 [
     {
-        path:"",
-        component:HomeComponent
-    },
-    {
-        path:"actividades",
+        path:"adminActs",
         component:ListaActividadesComponent
     },
     {
-        path:"usuarios",
+        path:"adminUsers",
         component:ListaUsuariosComponent
     },
     {
@@ -27,11 +20,7 @@ export const routes: Routes =
         component:LoginComponent
     },
     {
-        path:"actividadForm/:id",
-        component:ActividadFormComponent
-    },
-    {
-        path:"actividad",
+        path:"actividad/:id",
         component:ActividadComponent
     },
     {
@@ -39,7 +28,7 @@ export const routes: Routes =
         component:UsuarioFormComponent
     },
     {
-        path:"usuario/:id",
-        component:UsuarioComponent
+      path: "**",
+      redirectTo: "login"
     }
 ];
