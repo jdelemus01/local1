@@ -1,0 +1,46 @@
+@if(acts.length > 0 && consumidor != null){
+    <div>
+        <table>
+            <thead>
+                <th>Título</th>
+                <th>Duración</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>¿Aire libre?</th>
+                <th>¿+18?</th>
+            </thead>
+            <tbody>
+                @for (act of acts; track $index) {
+                        <tr>
+                        <td>{{act.nombre}}</td>
+                        <td>{{act.duracion}}</td>
+                        <td>{{act.fecha}}</td>
+                        <td>{{act.tipo.nombre}}</td>
+                        <td>{{act.precio}}</td>
+                        @if(act.aireLibre){
+                            <td>Sí</td>
+                        }@else {
+                            <td>No</td>
+                        }
+                        @if(act.mas18){
+                            <td>Sí</td>
+                        }@else {
+                            <td>No</td>
+                        }
+                        @if(this.calcularMas18(this.consumidor.fechaNacimiento)){
+                            <td><button [disabled]="!disponible">Inscribirme</button></td>
+                        } @else {
+
+                        }
+                    </tr>
+                    }
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+        </table>
+    </div>
+} @else {
+    <h1>No se han encontrado actividades</h1>
+}

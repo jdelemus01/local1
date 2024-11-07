@@ -53,6 +53,12 @@ public class ActividadServiceImpl implements ActividadService {
         return actividadRepositorio.findAll();
     }
     
+    
+    @Override
+    public List<Actividad> getActividadesByOfertante(Long id) {
+        return actividadRepositorio.findByOfertante(id);
+    }
+
     @Override
     public void deleteActividad(Long id) {
         Actividad actividad = actividadRepositorio.getReferenceById(id);

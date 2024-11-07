@@ -17,4 +17,18 @@ export class UsuarioService {
     
     return this.http.get<any[]>(peticion);
   }
+
+  getUsuarioById(id: number){
+    let peticion:string=`${this.URL}/getUsuario/`+id;
+    console.log(peticion);
+
+    return this.http.get<any>(peticion);
+  }
+
+  getUsuarioByUsername(username: string){
+    let peticion:string=`${this.URL}/getUsuarioUsername/`+username;
+    console.log(peticion);
+
+    return this.http.get<any>(peticion);
+  }
 }

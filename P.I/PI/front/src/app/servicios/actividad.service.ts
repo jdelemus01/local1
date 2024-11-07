@@ -18,6 +18,13 @@ export class ActividadService {
     return this.http.get<any[]>(peticion);
   }
 
+  getActividadesByOfertante(idOf: number){
+    let peticion = `${this.URL}/getActsByOf/`+idOf;
+    console.log(peticion);
+
+    return this.http.get<any>(peticion);
+  }
+
   deleteActividad(id:number){
     let peticion: string = `${this.URL}/borrarActividad/`+id;
     console.log(peticion);

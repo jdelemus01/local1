@@ -1,4 +1,4 @@
-package com.velazquez.apirestpi.controllers.ejemplo;
+package com.velazquez.apirestpi.controllers;
 
 import java.util.List;
 import java.util.Optional;

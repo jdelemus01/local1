@@ -24,4 +24,18 @@ export class OfertanteService {
 
     return this.http.get<Ofertante>(peticion);
   }
+
+  getOfertanteByUsername(usuario: number){
+    let peticion = `${this.URL}/getOfertanteUser/`+usuario;
+    console.log(peticion);
+
+    return this.http.get<Ofertante>(peticion);
+  }
+
+  insertOfertante(ofertante:Ofertante){
+    let peticion = `${this.URL}/insOfer`;
+    console.log(peticion, "Ofertante recibido: ", ofertante);
+
+    return this.http.post<any>(peticion, ofertante);
+  }
 }

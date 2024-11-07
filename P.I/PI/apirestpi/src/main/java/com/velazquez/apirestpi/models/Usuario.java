@@ -12,24 +12,19 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false, insertable = false, updatable = false)
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
-
-    @Column(name = "password", nullable = false)
-    private String password;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "rol", nullable = false)
-    private Rol rol;
-
+    /*
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Consumidor consumidor;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Ofertante ofertante;
+    private Ofertante ofertante; 
+     */
 
     public Long getId() {
         return id;
@@ -47,14 +42,6 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -63,23 +50,13 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((rol == null) ? 0 : rol.hashCode());
         return result;
     }
 
@@ -102,25 +79,17 @@ public class Usuario implements Serializable {
                 return false;
         } else if (!username.equals(other.username))
             return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
         if (email == null) {
             if (other.email != null)
                 return false;
         } else if (!email.equals(other.email))
-            return false;
-        if (rol != other.rol)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", rol="
-                + rol + "]";
+        return "Usuario [id=" + id + ", username=" + username + ", email=" + email + "]";
     }
 
 }

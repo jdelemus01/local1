@@ -8,8 +8,8 @@ import com.velazquez.apirestpi.models.Ofertante;
 public interface OfertanteService {
 
     public List<Ofertante> getAllOfertantes();
-
     public Optional<Ofertante> getOfertanteById(Long id);
+    public Optional<Ofertante> getOfertanteByUsername(Long id);
 
     public void deleteOfertante(Ofertante ofertante);
 

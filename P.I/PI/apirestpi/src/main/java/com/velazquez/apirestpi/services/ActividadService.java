@@ -11,6 +11,7 @@ public interface ActividadService {
     public Optional<Actividad> getActividadById(Long id);
     public List<Actividad> getActividadesmas18(boolean mas18);
     public List<Actividad> getActividadesAireLibre(boolean aireLibre);
+    public List<Actividad> getActividadesByOfertante(Long id);
 
     public void deleteActividad(Long id);
 

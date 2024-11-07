@@ -31,6 +31,13 @@ public class OfertanteServiceImpl implements OfertanteService {
         return ofertanteRepositorio.findById(id);
     }
 
+    
+
+    @Override
+    public Optional<Ofertante> getOfertanteByUsername(Long id) {
+        return ofertanteRepositorio.findByUsuario(id);
+    }
+
     @Override
     public void deleteOfertante(Ofertante ofertante) {
         ofertanteRepositorio.delete(ofertante);

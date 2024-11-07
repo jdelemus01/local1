@@ -1,4 +1,4 @@
-package com.velazquez.apirestpi.controllers.ejemplo;
+package com.velazquez.apirestpi.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.velazquez.apirestpi.dto.ActividadDTO;
 import com.velazquez.apirestpi.models.Actividad;
 import com.velazquez.apirestpi.services.impl.ActividadServiceImpl;
-import com.velazquez.apirestpi.mappers.Mapper;
+import com.velazquez.apirestpi.services.impl.OfertanteServiceImpl;
+
 
 
 
@@ -35,15 +35,27 @@ public class ActividadController {
     private ActividadServiceImpl actividadService;
 
     @Autowired
-    private Mapper<Actividad, ActividadDTO> actMapper;
+    private OfertanteServiceImpl ofertanteService;
 
     @GetMapping("/allActividades")
     public List<Actividad> getAllActividades() {
+        log.info("Cargando todas las actividades...");
         return actividadService.getAllActividades();
     }
 
+    @GetMapping("/getActsByOf/{id}")
+    public ResponseEntity<List<Actividad>> getMethodName(@PathVariable Long id) {
+        if(id != null && ofertanteService.getOfertanteById(id).isPresent()){
+            return new ResponseEntity<>(actividadService.getActividadesByOfertante(id), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+
     @GetMapping("/getActividad/{id}")
     public ResponseEntity<Actividad> getActividad(@PathVariable Long id){
+        log.info("Cargando la actividad " + id);
         Optional<Actividad> actGet = actividadService.getActividadById(id);
 
         if(!actGet.isPresent()){
@@ -55,38 +67,15 @@ public class ActividadController {
 
     @DeleteMapping("/borrarActividad/{id}")
     public ResponseEntity<?> borrarActividad(@PathVariable("id") Long id) {
+        log.info("Borrando la actividad " + id);
         actividadService.deleteActividad(id);
         return new ResponseEntity<>(actividadService.getAllActividades(), HttpStatus.OK);
     }
 
     @PostMapping("insertarActividad")
     public Actividad postMethodName(@RequestBody Actividad actividadIns) {
+        log.info("Generando una nueva actividad: " +actividadIns.getNombre());
+
         return actividadService.insertActividad(actividadIns);
     }
-    
-
-    
-    /*
-    @PutMapping("modificarActividad/{id}")
-    public Actividad putMethodName(@PathVariable Long id, @RequestBody ActividadDTO actividadUp) {
-        Optional<Actividad> actUpdate = actividadService.getActividadById(id);
-
-        if(actUpdate == null){
-            log.error("Esta actividad no está en la base de datos");
-            return null;
-        } else {
-            actUpdate.setId(id);
-            actUpdate.setNombre(actividadUp.getNombre());
-            actUpdate.setDuracion(actividadUp.getDuracion());
-            actUpdate.setFecha(actividadUp.getFecha());
-            actUpdate.setPrecio(actividadUp.getPrecio());
-            actUpdate.setAireLibre(actividadUp.isAireLibre());
-            actUpdate.setMas18(actividadUp.isMas18());
-            actUpdate.setOfertante(actividadUp.getOfertante());
-            actUpdate.setTipo(actividadUp.getTipo());
-
-            return actividadService.updateActividad(actUpdate); 
-        }
-    }
-     */
 }
