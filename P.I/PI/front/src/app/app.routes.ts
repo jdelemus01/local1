@@ -7,38 +7,37 @@ import { ActividadesOferComponent } from './componentes/actividades-ofer/activid
 import { ActividadFormComponent } from './componentes/actividad-form/actividad-form.component';
 import { ActividadesConsComponent } from './componentes/actividades-cons/actividades-cons.component';
 
-export const routes: Routes = 
-[
-    {
-        path:"login",
-        component:LoginComponent
-    },
-    {
-    path:"usForm/:id",
-    component:UsuarioFormComponent
-    },
-    {
-        path:"adminActs",
-        component:ListaActividadesComponent
-    },
-    {
-        path:"adminUsers",
-        component:ListaUsuariosComponent
-    },
-    {
-        path:"actsByOfer/:id",
-        component:ActividadesOferComponent
-    },
-    {
-        path:"actForm/:id/:idO",
-        component:ActividadFormComponent
-    },
-    {
-        path:"actsCons/:id",
-        component:ActividadesConsComponent
-    },
-    {
-      path: "**",
-      redirectTo: "login"
-    }
+export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'usForm/:id',
+    component: UsuarioFormComponent,
+  },
+  {
+    path: 'adminActs',
+    component: ListaActividadesComponent,
+  },
+  {
+    path: 'adminUsers',
+    component: ListaUsuariosComponent,
+  },
+  {
+    path: 'actsByOfer/:id',
+    component: ActividadesOferComponent,
+  },
+  {
+    path: 'actForm/:id/:idO',
+    component: ActividadFormComponent,
+  },
+  {
+    path: 'actsCons/:id',
+    component: ActividadesConsComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+  },
 ];
