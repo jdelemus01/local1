@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "CONSUMO_ACTIVIDAD")
 @IdClass(ConsumidorActividadId.class)
-public class ConsumidorActvidad implements Serializable {
+public class ConsumidorActividad implements Serializable {
 
     @Id
     @ManyToOne
@@ -19,12 +19,12 @@ public class ConsumidorActvidad implements Serializable {
     @JoinColumn(name = "idActividad", insertable = false, updatable = false)
     private Actividad actividad;
 
-    public ConsumidorActvidad(Consumidor consumidor, Actividad actividad) {
+    public ConsumidorActividad(Consumidor consumidor, Actividad actividad) {
         this.consumidor = consumidor;
         this.actividad = actividad;
     }
 
-    public ConsumidorActvidad() {
+    public ConsumidorActividad() {
     }
 
     public Consumidor getConsumidor() {
@@ -60,7 +60,7 @@ public class ConsumidorActvidad implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ConsumidorActvidad other = (ConsumidorActvidad) obj;
+        ConsumidorActividad other = (ConsumidorActividad) obj;
         if (consumidor == null) {
             if (other.consumidor != null)
                 return false;

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 

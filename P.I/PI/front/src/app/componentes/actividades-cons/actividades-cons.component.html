@@ -23,12 +23,20 @@
         }@else {
         <td>No</td>
         } @if(act.mas18){
-        <td>Sí</td>
+          @if(mayoriaDeEdad){
+            <td style="color: green;">Sí</td>
+          } @else {
+            <td style="color: red;">Sí</td>
+          }
         }@else {
         <td>No</td>
         }
 
-        <td><button [disabled]="!disponible">Inscribirme</button></td>
+        @if(consultarInscripcion(act.id)){
+          <td><button (click) = "eliminarInscripcion(act.id)">Cancelar Inscripción</button></td>
+        } @else {
+          <td><button (click) = "insertarInscripcion(act)">Inscribirme</button></td>
+        }
       </tr>
       }
     </tbody>

@@ -44,7 +44,7 @@ public class ActividadController {
     }
 
     @GetMapping("/getActsByOf/{id}")
-    public ResponseEntity<List<Actividad>> getMethodName(@PathVariable Long id) {
+    public ResponseEntity<List<Actividad>> getActvidadesByOfer(@PathVariable Long id) {
         if(id != null && ofertanteService.getOfertanteById(id).isPresent()){
             return new ResponseEntity<>(actividadService.getActividadesByOfertante(id), HttpStatus.OK);
         }else {
