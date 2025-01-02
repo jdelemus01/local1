@@ -8,18 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.velazquez.apirestpi.models.Ofertante;
 import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.services.impl.OfertanteServiceImpl;
 import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
+import org.springframework.web.bind.annotation.PutMapping;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -60,7 +63,7 @@ public class OfertanteController {
         }
     }
 
-    @GetMapping("getOferUsernames")
+    @GetMapping("/getOferUsernames")
     public List<String> getOferUsernames() {
         List<Usuario> usuarios = usuarioService.getAllUsuarios();
         List<Ofertante> ofertantes = ofertanteServiceImpl.getAllOfertantes();
@@ -95,4 +98,28 @@ public class OfertanteController {
         }
     }
 
+    @PutMapping("modificarOfertante/{id}")
+    public ResponseEntity<?> updateOfertante(@PathVariable Long id, @RequestBody Ofertante ofertante) {
+        Optional<Ofertante> ofertanteGet = ofertanteServiceImpl.getOfertanteById(id);
+
+        if(!ofertanteGet.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            ofertanteServiceImpl.updateOfertante(ofertante);
+            return new ResponseEntity<>(ofertante, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/borrarOfertante/{id}")
+    public ResponseEntity<?> deleteOfertante(@PathVariable Long id){
+
+        Optional<Ofertante> ofertanteGet = ofertanteServiceImpl.getOfertanteById(id);
+        if(!ofertanteGet.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            ofertanteServiceImpl.deleteOfertante(ofertanteGet.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        }
+    }
 }

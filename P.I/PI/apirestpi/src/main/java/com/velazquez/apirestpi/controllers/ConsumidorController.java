@@ -9,18 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.velazquez.apirestpi.models.Consumidor;
 import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.services.impl.ConsumidorServiceImpl;
 import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
+import org.springframework.web.bind.annotation.PutMapping;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -37,7 +40,7 @@ public class ConsumidorController {
     UsuarioServiceImpl usuarioService;
 
     @GetMapping("getConsUser/{username}")
-    public ResponseEntity<Consumidor> postMethodName(@PathVariable Long username) {
+    public ResponseEntity<Consumidor> getConsumidorByUsername(@PathVariable Long username) {
         Optional<Consumidor> consumidorGet = consumidorService.getConsumidorByUsuario(username);
 
         if(consumidorGet.isPresent()){
@@ -72,8 +75,6 @@ public class ConsumidorController {
         return usernamesCons;
     }
     
-    
-
     @PostMapping("/insCons")
     public ResponseEntity<Consumidor> insertConsumidor(@RequestBody Consumidor consumidorIns) {
         
@@ -85,6 +86,30 @@ public class ConsumidorController {
         } else {
             consumidorIns.setUsuario(usuarioService.insertUsuario(consumidorIns.getUsuario()));
             return new ResponseEntity<>(consumidorService.insertConsumidor(consumidorIns), HttpStatus.CREATED);
+        }
+    }
+
+    @PutMapping("/modificarConsumidor/{id}")
+    public ResponseEntity<?> updateConsumidor(@PathVariable Long id, @RequestBody Consumidor consumidor) {
+        Optional<Consumidor> consumidorGet = consumidorService.getConsumidorById(id);
+
+        if(!consumidorGet.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            consumidorService.updateConsumidor(consumidor);
+            return new ResponseEntity<>(consumidor, HttpStatus.OK);
+        } 
+    }
+
+    @DeleteMapping("/borrarConsumidor/{id}")
+    public ResponseEntity<?> deleteConsumidor(@PathVariable Long id) {
+        Optional<Consumidor> consumidorGet = consumidorService.getConsumidorById(id);
+
+        if(!consumidorGet.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            consumidorService.deleteConsumidor(consumidorGet.get());;
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 }

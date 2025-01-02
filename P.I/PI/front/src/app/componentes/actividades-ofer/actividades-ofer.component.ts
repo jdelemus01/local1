@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActividadService } from '../../servicios/actividad.service';
 import { Actividad } from '../../modelos/actividad';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SharedDataService } from '../../servicios/shared-data.service';
 
 @Component({
   selector: 'app-actividades-ofer',
@@ -12,16 +13,31 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class ActividadesOferComponent {
 
-  public acts : Actividad [] = [];
-  public idOf : number; 
+  public acts: Actividad[] = [];
+  public idOf: number;
 
-  constructor(private actService: ActividadService, private ar: ActivatedRoute) {
+  constructor(
+    private actService: ActividadService,
+    private ar: ActivatedRoute,
+    private sharedDataService: SharedDataService
+  ) {
+
     this.idOf = this.ar.snapshot.params["id"];
-
     this.actService.getActividadesByOfertante(this.idOf).subscribe(
       data => {
         this.acts = data;
       }
     );
+
+  }
+
+  borrarAct(id: number, nombre: string) {
+    if (confirm("¿Estás seguro de que quieres borrar tu actividad \"" + nombre + "\"?")) {
+      this.actService.deleteActividad(id).subscribe(
+        (data) => {
+          this.acts = data;
+        }
+      );
+    }
   }
 }

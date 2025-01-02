@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.velazquez.apirestpi.models.Actividad;
 import com.velazquez.apirestpi.services.impl.ActividadServiceImpl;
 import com.velazquez.apirestpi.services.impl.OfertanteServiceImpl;
-
-
-
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/actividad")
@@ -73,9 +71,24 @@ public class ActividadController {
     }
 
     @PostMapping("insertarActividad")
-    public Actividad postMethodName(@RequestBody Actividad actividadIns) {
+    public ResponseEntity<?> postMethodName(@RequestBody Actividad actividadIns) {
         log.info("Generando una nueva actividad: " +actividadIns.getNombre());
+        if(actividadService.getActividadById(actividadIns.getId()).isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            actividadService.insertActividad(actividadIns);
+            return new ResponseEntity<>(actividadService.getActividadesByOfertante(actividadIns.getOfertante().getId()), HttpStatus.OK);
+        }
+    }
 
-        return actividadService.insertActividad(actividadIns);
+    @PutMapping("modificarActividad/{id}")
+    public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody Actividad actividad) {
+        Optional<Actividad> actGet = actividadService.getActividadById(id);
+        if(!actGet.isPresent()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            actividadService.updateActividad(actividad);
+            return new ResponseEntity<>(actividadService.getActividadesByOfertante(actividad.getOfertante().getId()), HttpStatus.OK);
+        }
     }
 }

@@ -31,7 +31,7 @@ public class ActividadServiceImpl implements ActividadService {
             return actGet;
         } else {
             log.error("No se ha encontrado ninguna actividad con el id " + id);
-            return null;
+            return actGet;
         }
     }
 

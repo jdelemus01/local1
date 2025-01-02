@@ -5,22 +5,12 @@
   <form #actForm="ngForm" (ngSubmit)="onSubmit(actForm.value)">
     <div>
       <label> Título: </label>
-      <input
-        type="text"
-        required
-        name="nombre"
-        [(ngModel)]="actividad.nombre"
-      />
+      <input type="text" required name="nombre" [(ngModel)]="actividad.nombre" />
     </div>
 
     <div>
       <label> Duración: </label>
-      <input
-        type="text"
-        required
-        name="duracion"
-        [(ngModel)]="actividad.duracion"
-      />
+      <input type="number" required name="duracion" [(ngModel)]="actividad.duracion" />
     </div>
 
     <div>
@@ -30,35 +20,22 @@
 
     <div>
       <label> ¿Es al aire libre? </label>
-      <input
-        type="checkbox"
-        name="aireLibre"
-        [(ngModel)]="actividad.aireLibre"
-      />
+      <input type="checkbox" name="aireLibre" [(ngModel)]="actividad.aireLibre" />
     </div>
 
     <div>
       <label> ¿Pueden asistir menores de edad? </label>
-      <input
-        type="checkbox"
-        name="mas18"
-        [(ngModel)]="actividad.mas18"
-      />
+      <input type="checkbox" name="mas18" [(ngModel)]="actividad.mas18" />
     </div>
 
     <div>
       <label> Precio por persona: </label>
-      <input
-        type="text"
-        required
-        name="precio"
-        [(ngModel)]="actividad.precio"
-      />
+      <input type="text" required name="precio" [(ngModel)]="actividad.precio" />
     </div>
 
     <div>
       <label> Categoría: </label>
-      <select name="tipo" required [(ngModel)]="actividad.tipo">
+      <select name="tipo" required [(ngModel)]="tipoSelec">
         @for (tipo of tipos; track $index) {
         <option [ngValue]="tipo">
           {{ tipo.nombre }}
@@ -68,29 +45,17 @@
     </div>
     <div style="visibility: hidden">
       <label> Ofertante: </label>
-      <input
-        type="text"
-        required
-        name="ofertante"
-        readonly
-        [(ngModel)]="actividad.ofertante"
-      />
+      <input type="text" required name="ofertante" readonly [(ngModel)]="actividad.ofertante" />
     </div>
     <div style="visibility: hidden">
       <label> ID: </label>
-      <input
-        type="text"
-        required
-        name="id"
-        readonly
-        [(ngModel)]="actividad.id"
-      />
+      <input type="text" required name="id" readonly [(ngModel)]="actividad.id" />
     </div>
     <div>
       <button type="submit" [disabled]="!actForm.valid">Crear Actividad</button>
     </div>
-      <div>
+    <div>
       <button type="button" routerLink="actsByOfer/ofertante.id">Volver</button>
-      </div>
+    </div>
   </form>
 </div>
