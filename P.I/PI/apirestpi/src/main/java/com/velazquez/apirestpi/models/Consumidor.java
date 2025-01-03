@@ -30,7 +30,7 @@ public class Consumidor implements Serializable {
     private Date fechaNacimiento;
 
     @OneToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     private String rol = "CON";

@@ -85,7 +85,7 @@ public class OfertanteController {
         if(ofertanteIns == null || ofertanteServiceImpl.getOfertanteById(ofertanteIns.getId()).isPresent()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            if(!(usuarioService.getUsuarioByUsername(ofertanteIns.getUsuario().getUsername()).isPresent())){
+            if(!(usuarioService.getUsuarioById(ofertanteIns.getUsuario().getId()).isPresent())){
                 ofertanteIns.setUsuario(usuarioService.insertUsuario(ofertanteIns.getUsuario()));;
                 ofertanteServiceImpl.insertOfertante(ofertanteIns);
     

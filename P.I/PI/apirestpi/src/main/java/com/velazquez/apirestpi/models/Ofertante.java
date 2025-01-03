@@ -32,7 +32,7 @@ public class Ofertante implements Serializable {
     private Date fechaNacimiento;
 
     @OneToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL, orphanRemoval = true)

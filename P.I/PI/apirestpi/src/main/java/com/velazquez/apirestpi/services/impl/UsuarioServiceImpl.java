@@ -6,14 +6,18 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.velazquez.apirestpi.models.JPAUser;
 import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.repositories.UsuarioRepositorio;
 import com.velazquez.apirestpi.services.UsuarioService;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
 
     private final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
@@ -27,8 +31,13 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Optional<Usuario> getUsuarioByUsername(String username) {
-        return usuarioRepositorio.findByUsername(username);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        Optional<Usuario> usuario = usuarioRepositorio.findByUsername(username);
+        if(!usuario.isPresent()){
+            throw new UsernameNotFoundException("No se han encontrado cuentas asociadas al username: "+ username);
+        }
+
+        return new JPAUser(usuario.get());
     }
 
 

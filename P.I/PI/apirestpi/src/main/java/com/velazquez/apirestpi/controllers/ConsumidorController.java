@@ -23,11 +23,6 @@ import com.velazquez.apirestpi.services.impl.ConsumidorServiceImpl;
 import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
-
-
 @RestController
 @CrossOrigin
 @RequestMapping("/consumidor")
