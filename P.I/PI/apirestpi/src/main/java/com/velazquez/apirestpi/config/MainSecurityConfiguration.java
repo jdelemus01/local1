@@ -1,23 +1,30 @@
 package com.velazquez.apirestpi.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class MainSecurityConfiguration {
-
+    /*
     @Autowired
     UsuarioServiceImpl jpaUser;
-
+   
     @Bean
     public void AuthenticationManagerBuilder(HttpSecurity httpSec) throws Exception {
         AuthenticationManagerBuilder AuthenticationManagerBuilder = httpSec.getSharedObject(AuthenticationManagerBuilder.class);
@@ -25,6 +32,50 @@ public class MainSecurityConfiguration {
         AuthenticationManagerBuilder.
             userDetailsService(jpaUser).
             passwordEncoder(getPasswordEncoder());
+    }
+     */
+
+     @Bean
+     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable()).
+            sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
+            authorizeHttpRequests(authorize -> authorize
+                //Aquí meter funcionalidad de ver actividades sin registro 
+                .requestMatchers("").permitAll()
+                .anyRequest().authenticated());
+
+        return http.build();
+     }
+
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilterConfiguration(){
+        UrlBasedCorsConfigurationSource fuente = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration configuracion = new CorsConfiguration();
+        
+
+        configuracion.setAllowCredentials(true);
+        configuracion.addAllowedOrigin("http://localhost:4200");
+        configuracion.setMaxAge(3600L);
+
+        configuracion.setAllowedHeaders(Arrays.asList(
+            org.springframework.http.HttpHeaders.AUTHORIZATION,
+            org.springframework.http.HttpHeaders.CONTENT_TYPE,
+            org.springframework.http.HttpHeaders.ACCEPT
+        ));
+
+        configuracion.setAllowedMethods(Arrays.asList(
+            org.springframework.http.HttpMethod.GET.name(),
+            org.springframework.http.HttpMethod.POST.name(),
+            org.springframework.http.HttpMethod.PUT.name(),
+            org.springframework.http.HttpMethod.DELETE.name()
+        ));
+
+        fuente.registerCorsConfiguration("/**", configuracion);
+
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(fuente));
+        bean.setOrder(FilterRegistrationBean.HIGHEST_PRECEDENCE);
+
+        return bean;
     }
 
 

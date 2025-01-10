@@ -10,6 +10,7 @@ public interface OfertanteService {
     public List<Ofertante> getAllOfertantes();
     public Optional<Ofertante> getOfertanteById(Long id);
     public Optional<Ofertante> getOfertanteByUsername(Long id);
+    public Optional<Ofertante> getOfertanteByEmail(String email);
 
     public void deleteOfertante(Ofertante ofertante);
 

@@ -21,8 +21,11 @@ public class Consumidor implements Serializable {
     @Column(name = "apellido", nullable = false)
     private String apellido;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "contrasenya", nullable = false)
+    private String contrasenya;
 
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -80,11 +83,23 @@ public class Consumidor implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return contrasenya;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String contrasenya) {
+        this.contrasenya = contrasenya;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     @Override
@@ -94,7 +109,8 @@ public class Consumidor implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
         result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         result = prime * result + ((rol == null) ? 0 : rol.hashCode());
@@ -125,10 +141,15 @@ public class Consumidor implements Serializable {
                 return false;
         } else if (!apellido.equals(other.apellido))
             return false;
-        if (password == null) {
-            if (other.password != null)
+        if (email == null) {
+            if (other.email != null)
                 return false;
-        } else if (!password.equals(other.password))
+        } else if (!email.equals(other.email))
+            return false;
+        if (contrasenya == null) {
+            if (other.contrasenya != null)
+                return false;
+        } else if (!contrasenya.equals(other.contrasenya))
             return false;
         if (fechaNacimiento == null) {
             if (other.fechaNacimiento != null)
@@ -150,9 +171,12 @@ public class Consumidor implements Serializable {
 
     @Override
     public String toString() {
-        return "Consumidor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
-                + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario + ", rol=" + rol + "]";
+        return "Consumidor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+                + ", password=" + contrasenya + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario + ", rol="
+                + rol + "]";
     }
+
+    
 
     
 }

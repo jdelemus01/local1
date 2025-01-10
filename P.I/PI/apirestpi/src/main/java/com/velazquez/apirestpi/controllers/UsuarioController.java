@@ -1,10 +1,9 @@
 package com.velazquez.apirestpi.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +24,11 @@ public class UsuarioController {
     private UsuarioServiceImpl usuarioService;
 
     @GetMapping("getUsuarioUsername/{username}")
-    public ResponseEntity<Usuario> getUsuarioByUsername(@PathVariable String username) {
-        Optional<Usuario> usuarioGet = usuarioService.getUsuarioByUsername(username);
+    public ResponseEntity<?> getUsuarioByUsername(@PathVariable String username) {
+        UserDetails usuarioGet = usuarioService.loadUserByUsername(username);
 
-        if(usuarioGet.isPresent()){
-            return new ResponseEntity<>(usuarioGet.get(), HttpStatus.OK);
+        if(usuarioGet != null){
+            return new ResponseEntity<>(usuarioGet, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

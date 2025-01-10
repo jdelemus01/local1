@@ -14,4 +14,6 @@ public interface OfertanteRepositorio extends JpaRepository<Ofertante, Long>{
 
     @Query("SELECT o FROM Ofertante o WHERE o.usuario.id = :username")
     public Optional<Ofertante> findByUsuario(@Param("username") Long username);
+
+    public Optional<Ofertante> findByEmail(String email);
 }

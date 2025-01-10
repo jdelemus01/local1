@@ -17,19 +17,18 @@ import com.velazquez.apirestpi.repositories.UsuarioRepositorio;
 import com.velazquez.apirestpi.services.UsuarioService;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
+public class UsuarioServiceImpl implements UsuarioService/* , UserDetailsService*/{
 
     private final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
     @Autowired UsuarioRepositorio usuarioRepositorio;
-
-    
 
     @Override
     public Optional<Usuario> getUsuarioById(Long id) {
          return usuarioRepositorio.findById(id);
     }
 
+    /*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         Optional<Usuario> usuario = usuarioRepositorio.findByUsername(username);
@@ -39,6 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
 
         return new JPAUser(usuario.get());
     }
+     */
 
 
 

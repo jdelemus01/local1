@@ -30,8 +30,11 @@ public class OfertanteServiceImpl implements OfertanteService {
     public Optional<Ofertante> getOfertanteById(Long id) {
         return ofertanteRepositorio.findById(id);
     }
-
     
+    @Override
+    public Optional<Ofertante> getOfertanteByEmail(String email) {
+        return ofertanteRepositorio.findByEmail(email);
+    }
 
     @Override
     public Optional<Ofertante> getOfertanteByUsername(Long id) {

@@ -33,11 +33,11 @@ public class JPAUser implements UserDetails {
     @Override
     public String getPassword() {
         if(this.usuario.getConsumidor() != null || this.usuario.getOfertante() != null){
-            return this.usuario.getConsumidor().getPassword() + ' ' + this.usuario.getOfertante().getPassword();
+            return this.usuario.getConsumidor().getPassword() + ' ' + this.usuario.getOfertante().getContrasenya();
         } else if(this.usuario.getConsumidor() != null){
                 return this.usuario.getConsumidor().getPassword();
             } else if(this.usuario.getOfertante() != null){
-                return this.usuario.getOfertante().getPassword();
+                return this.usuario.getOfertante().getContrasenya();
             } else {
                 return null;
             }

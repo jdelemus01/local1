@@ -23,8 +23,11 @@ public class Ofertante implements Serializable {
     @Column(name = "apellido", nullable = false)
     private String apellido;
 
-    @Column(name = "password", nullable = true)
-    private String password;
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "contrasenya", nullable = true)
+    private String contrasenya;
 
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -92,14 +95,20 @@ public class Ofertante implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    
-
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContrasenya() {
+        return contrasenya;
+    }
+
+    public void setContrasenya(String password) {
+        this.contrasenya = password;
     }
 
     @Override
@@ -109,7 +118,8 @@ public class Ofertante implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
         result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         result = prime * result + ((actividades == null) ? 0 : actividades.hashCode());
@@ -141,10 +151,15 @@ public class Ofertante implements Serializable {
                 return false;
         } else if (!apellido.equals(other.apellido))
             return false;
-        if (password == null) {
-            if (other.password != null)
+        if (email == null) {
+            if (other.email != null)
                 return false;
-        } else if (!password.equals(other.password))
+        } else if (!email.equals(other.email))
+            return false;
+        if (contrasenya == null) {
+            if (other.contrasenya != null)
+                return false;
+        } else if (!contrasenya.equals(other.contrasenya))
             return false;
         if (fechaNacimiento == null) {
             if (other.fechaNacimiento != null)
@@ -171,10 +186,12 @@ public class Ofertante implements Serializable {
 
     @Override
     public String toString() {
-        return "Ofertante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
-                + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario + ", actividades=" + actividades
-                + ", rol=" + rol + "]";
+        return "Ofertante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+                + ", contrasenya=" + contrasenya + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario
+                + ", actividades=" + actividades + ", rol=" + rol + "]";
     }
+
+    
 
     
 }
