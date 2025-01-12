@@ -1,8 +1,8 @@
 package com.velazquez.apirestpi.services;
 
 
-import com.velazquez.apirestpi.dto.ConsumidorDTO;
-import com.velazquez.apirestpi.dto.OfertanteDTO;
+import com.velazquez.apirestpi.models.Consumidor;
+import com.velazquez.apirestpi.models.Ofertante;
 
 public interface CredentialsService {
 
@@ -10,7 +10,7 @@ public interface CredentialsService {
 
     public String loginOfertante(String email, String contrasenya);
 
-    public void registroConsumidor(ConsumidorDTO consumidorDTO);
+    public boolean registroConsumidor(Consumidor consumidor);
 
-    public void registroOfertante(OfertanteDTO ofertanteDTO);
+    public boolean registroOfertante(Ofertante ofertante);
 }

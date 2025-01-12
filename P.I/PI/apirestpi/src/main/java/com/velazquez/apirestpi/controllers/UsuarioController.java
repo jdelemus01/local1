@@ -3,7 +3,6 @@ package com.velazquez.apirestpi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +22,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
+    /*
     @GetMapping("getUsuarioUsername/{username}")
     public ResponseEntity<?> getUsuarioByUsername(@PathVariable String username) {
         UserDetails usuarioGet = usuarioService.loadUserByUsername(username);
@@ -34,6 +34,7 @@ public class UsuarioController {
         }
 
     }
+     */
     
 
     @GetMapping("getUsuario/{id}")

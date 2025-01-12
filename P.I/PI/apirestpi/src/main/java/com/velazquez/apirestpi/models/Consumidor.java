@@ -82,11 +82,11 @@ public class Consumidor implements Serializable {
         return rol;
     }
 
-    public String getPassword() {
+    public String getContrasenya() {
         return contrasenya;
     }
 
-    public void setPassword(String contrasenya) {
+    public void setContrasenya(String contrasenya) {
         this.contrasenya = contrasenya;
     }
 

@@ -1,3 +1,4 @@
+/*
 package com.velazquez.apirestpi.models;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class JPAUser implements UserDetails {
+public class JPAUser implements UserDetails{
     private Usuario usuario;
 
     public JPAUser(Usuario usuario) { 
@@ -16,6 +17,7 @@ public class JPAUser implements UserDetails {
     }
 
     //Esto establece los roles de los usuarios (Puede añadir dos roles a un usuario, pero el de admin no, porque solo hay uno y soy yo).
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -27,9 +29,11 @@ public class JPAUser implements UserDetails {
         }
         return authorities;
     }
+    
 
     //Este método devuelve las contraseñas separadas por un espacio del usuario en caso de que tenga dos cuentas, y la contraseña normal en caso de que solo tenga una cuenta.
     //(Voy a meter una regla de validación al campo contraseña para que no pueda contener espacios).
+    
     @Override
     public String getPassword() {
         if(this.usuario.getConsumidor() != null || this.usuario.getOfertante() != null){
@@ -42,6 +46,7 @@ public class JPAUser implements UserDetails {
                 return null;
             }
         }
+     
 
     @Override
     public String getUsername() {
@@ -68,3 +73,4 @@ public class JPAUser implements UserDetails {
         return this.usuario.isActivo();
     }
 }
+*/

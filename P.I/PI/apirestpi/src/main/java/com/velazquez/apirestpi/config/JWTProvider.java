@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.velazquez.apirestpi.dto.UsuarioDTO;
+import com.velazquez.apirestpi.models.Usuario;
 
 import jakarta.annotation.PostConstruct;
 
@@ -27,13 +27,13 @@ public class JWTProvider {
         algoritmo = Algorithm.HMAC512(claveSecreta);
     }
 
-    public String crearToken(UsuarioDTO usuarioDTO, String rol) {
+    public String crearToken(Usuario usuario, String rol) {
         Instant ahora = Instant.now();
 
         Instant limite = ahora.plus(1, ChronoUnit.HOURS);
 
             return JWT.create()
-                .withSubject(usuarioDTO.getUsername())
+                .withSubject(usuario.getUsername())
                 .withClaim("Rol", rol)
                 .withIssuedAt(Date.from(ahora))
                 .withExpiresAt(Date.from(limite))

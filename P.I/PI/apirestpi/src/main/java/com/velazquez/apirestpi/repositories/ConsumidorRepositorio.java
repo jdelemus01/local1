@@ -12,4 +12,6 @@ import com.velazquez.apirestpi.models.Consumidor;
 public interface ConsumidorRepositorio extends JpaRepository<Consumidor, Long>{
     @Query("SELECT c FROM Consumidor c WHERE c.usuario.id = :username")
     public Optional<Consumidor> findByUsuario(@Param("username") Long username);
+
+    public Optional<Consumidor> findByEmail(String email);
 }

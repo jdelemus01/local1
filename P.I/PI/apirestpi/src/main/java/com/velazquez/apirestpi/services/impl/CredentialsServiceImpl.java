@@ -5,10 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.auth0.jwt.JWT;
 import com.velazquez.apirestpi.config.JWTProvider;
-import com.velazquez.apirestpi.dto.ConsumidorDTO;
-import com.velazquez.apirestpi.dto.OfertanteDTO;
+import com.velazquez.apirestpi.config.MainSecurityConfiguration;
 import com.velazquez.apirestpi.models.Consumidor;
 import com.velazquez.apirestpi.models.Ofertante;
 import com.velazquez.apirestpi.services.CredentialsService;
@@ -32,30 +30,68 @@ public class CredentialsServiceImpl implements CredentialsService {
     }   
 
     @Override
-    public void registroConsumidor(ConsumidorDTO consumidorDTO) {
-        // TODO Auto-generated method stub
+    public boolean registroConsumidor(Consumidor consumidor) {
+        Boolean todoOk = false;
+
+        try{
+            if(consumidor.getUsuario() == null){
+                usuarioService.insertUsuario(consumidor.getUsuario());
+                consumidorService.insertConsumidor(consumidor);
+                todoOk = true;
+           } else {
+                consumidorService.insertConsumidor(consumidor);
+           }
+        }
+        catch(Exception e){
+            todoOk = false;
+        }
+        return todoOk;
     }
 
     @Override
-    public void registroOfertante(OfertanteDTO ofertanteDTO) {
-        // TODO Auto-generated method stub
+    public boolean registroOfertante(Ofertante ofertante) {
+       Boolean todoOk = false;
+
+       try{
+           if(ofertante.getUsuario() == null){
+               usuarioService.insertUsuario(ofertante.getUsuario());
+               ofertanteService.insertOfertante(ofertante);
+          } else {
+               ofertanteService.insertOfertante(ofertante);
+          }
+          todoOk = true;
+       }
+       catch(Exception e){
+            todoOk = false;
+        }
+        return todoOk;
     }
 
     @Override
     public String loginConsumidor(String email, String contrasenya) {
         String jwt = "";
-        Optional<Ofertante> ofertante = ofertanteService.getOfertanteByEmail(email);
+        Optional<Consumidor> consumidor = consumidorService.getConsumidorByEmail(email);
 
-        if(ofertante.isPresent()){
-            jwt = jwtProvider.crearToken(, "ofe")
+        if(consumidor.isPresent()){            
+            if(MainSecurityConfiguration.getPasswordEncoder().matches(contrasenya, consumidor.get().getContrasenya())){
+                jwt = jwtProvider.crearToken(consumidor.get().getUsuario(), "CON");
+            }
         }
         return jwt;
     }
 
     @Override
-    public Optional<Ofertante> loginOfertante(String email, String contrasenya) {
+    public String loginOfertante(String email, String contrasenya) {
         // TODO Auto-generated method stub
-        return Optional.empty();
+        String jwt = "";
+        Optional<Ofertante> ofertante = ofertanteService.getOfertanteByEmail(email);
+
+        if(ofertante.isPresent()){            
+            if(MainSecurityConfiguration.getPasswordEncoder().matches(contrasenya, ofertante.get().getContrasenya())){
+                jwt = jwtProvider.crearToken(ofertante.get().getUsuario(), "CON");
+            }
+        }
+        return jwt;
     }
 
 }

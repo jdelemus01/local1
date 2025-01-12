@@ -40,6 +40,12 @@ public class ConsumidorServiceImpl implements ConsumidorService {
     }
 
     @Override
+    public Optional<Consumidor> getConsumidorByEmail(String email) {
+        Optional<Consumidor> consumidorGet = consumidorRepositorio.findByEmail(email);
+        return consumidorGet;
+    }
+
+    @Override
     public Consumidor insertConsumidor(Consumidor consumidor) {
         Consumidor consumidorIns = new Consumidor();
 

@@ -2,7 +2,6 @@ package com.velazquez.apirestpi.config;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,24 +15,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.velazquez.apirestpi.services.impl.UsuarioServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class MainSecurityConfiguration {
-    /*
-    @Autowired
-    UsuarioServiceImpl jpaUser;
-   
-    @Bean
-    public void AuthenticationManagerBuilder(HttpSecurity httpSec) throws Exception {
-        AuthenticationManagerBuilder AuthenticationManagerBuilder = httpSec.getSharedObject(AuthenticationManagerBuilder.class);
-
-        AuthenticationManagerBuilder.
-            userDetailsService(jpaUser).
-            passwordEncoder(getPasswordEncoder());
-    }
-     */
 
      @Bean
      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -80,7 +65,7 @@ public class MainSecurityConfiguration {
 
 
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
+    public static PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(15);
     }
 }

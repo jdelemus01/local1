@@ -10,6 +10,7 @@ public interface ConsumidorService {
     public List<Consumidor> getAllConsumidores();
     public Optional<Consumidor> getConsumidorById(Long id);
     public Optional<Consumidor> getConsumidorByUsuario(Long username);
+    public Optional<Consumidor> getConsumidorByEmail(String email);
 
     public void deleteConsumidor(Consumidor consumidor);
 

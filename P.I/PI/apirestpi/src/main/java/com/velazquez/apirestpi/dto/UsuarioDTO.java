@@ -11,8 +11,6 @@ public class UsuarioDTO implements Serializable {
 
     private String password;
 
-    private String email;
-
     private Rol rol;
 
 
@@ -20,7 +18,6 @@ public class UsuarioDTO implements Serializable {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.email = email;
         this.rol = rol;
     }
 
@@ -49,14 +46,6 @@ public class UsuarioDTO implements Serializable {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Rol getRol() {
         return rol;
     }
@@ -64,7 +53,7 @@ public class UsuarioDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", rol="
+        return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", rol="
                 + rol + "]";
     }
 

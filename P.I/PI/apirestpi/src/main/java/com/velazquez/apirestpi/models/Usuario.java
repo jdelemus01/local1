@@ -22,9 +22,6 @@ public class Usuario implements Serializable {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Column(name = "email", nullable = false)
-    private String email;
-
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Consumidor consumidor;
 
@@ -47,14 +44,6 @@ public class Usuario implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public boolean isActivo() {
@@ -87,7 +76,6 @@ public class Usuario implements Serializable {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((consumidor == null) ? 0 : consumidor.hashCode());
         result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
         result = prime * result + (activo ? 1231 : 1237);
@@ -113,11 +101,6 @@ public class Usuario implements Serializable {
                 return false;
         } else if (!username.equals(other.username))
             return false;
-        if (email == null) {
-            if (other.email != null)
-                return false;
-        } else if (!email.equals(other.email))
-            return false;
         if (consumidor == null) {
             if (other.consumidor != null)
                 return false;
@@ -135,9 +118,9 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", username=" + username + ", email=" + email + ", consumidor=" + consumidor
-                + ", ofertante=" + ofertante + ", activo=" + activo + "]";
+        return "Usuario [id=" + id + ", username=" + username + ", consumidor=" + consumidor + ", ofertante="
+                + ofertante + ", activo=" + activo + "]";
     }
-
+    
     
 }
