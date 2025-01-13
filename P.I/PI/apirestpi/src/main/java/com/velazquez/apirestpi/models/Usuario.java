@@ -22,6 +22,9 @@ public class Usuario implements Serializable {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
+    @Column(name = "contrasenya", unique = true, nullable = false)
+    private String contrasenya;
+
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Consumidor consumidor;
 
@@ -45,6 +48,15 @@ public class Usuario implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getContrasenya() {
+        return contrasenya;
+    }
+
+    public void setContrasenya(String contrasenya) {
+        this.contrasenya = contrasenya;
+    }
+    
 
     public boolean isActivo() {
         return activo;
@@ -76,6 +88,7 @@ public class Usuario implements Serializable {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
+        result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
         result = prime * result + ((consumidor == null) ? 0 : consumidor.hashCode());
         result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
         result = prime * result + (activo ? 1231 : 1237);
@@ -101,6 +114,11 @@ public class Usuario implements Serializable {
                 return false;
         } else if (!username.equals(other.username))
             return false;
+        if (contrasenya == null) {
+            if (other.contrasenya != null)
+                return false;
+        } else if (!contrasenya.equals(other.contrasenya))
+            return false;
         if (consumidor == null) {
             if (other.consumidor != null)
                 return false;
@@ -118,9 +136,9 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", username=" + username + ", consumidor=" + consumidor + ", ofertante="
-                + ofertante + ", activo=" + activo + "]";
+        return "Usuario [id=" + id + ", username=" + username + ", contrasenya=" + contrasenya + ", consumidor="
+                + consumidor + ", ofertante=" + ofertante + ", activo=" + activo + "]";
     }
-    
-    
+
+     
 }

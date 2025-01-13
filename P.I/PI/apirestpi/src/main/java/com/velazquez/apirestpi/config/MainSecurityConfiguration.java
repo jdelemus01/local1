@@ -20,17 +20,17 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class MainSecurityConfiguration {
 
-     @Bean
-     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()).
-            sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
-            authorizeHttpRequests(authorize -> authorize
-                //Aquí meter funcionalidad de ver actividades sin registro 
-                .requestMatchers("").permitAll()
-                .anyRequest().authenticated());
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+       http.csrf(csrf -> csrf.disable()).
+           sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
+           authorizeHttpRequests(authorize -> authorize
+               //Aquí meter funcionalidad de ver actividades sin registro 
+               .requestMatchers("/auth/**").permitAll()
+               .anyRequest().authenticated());
 
-        return http.build();
-     }
+       return http.build();
+    }
 
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilterConfiguration(){
@@ -45,7 +45,8 @@ public class MainSecurityConfiguration {
         configuracion.setAllowedHeaders(Arrays.asList(
             org.springframework.http.HttpHeaders.AUTHORIZATION,
             org.springframework.http.HttpHeaders.CONTENT_TYPE,
-            org.springframework.http.HttpHeaders.ACCEPT
+            org.springframework.http.HttpHeaders.ACCEPT,
+            "Sec-Fetch-Site"
         ));
 
         configuracion.setAllowedMethods(Arrays.asList(

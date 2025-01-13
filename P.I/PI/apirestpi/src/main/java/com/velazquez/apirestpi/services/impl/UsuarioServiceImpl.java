@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.velazquez.apirestpi.config.MainSecurityConfiguration;
 import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.repositories.UsuarioRepositorio;
 import com.velazquez.apirestpi.services.UsuarioService;
@@ -24,6 +25,11 @@ public class UsuarioServiceImpl implements UsuarioService{
          return usuarioRepositorio.findById(id);
     }
 
+    @Override
+    public Optional<Usuario> getUsuarioByUsername(String usuario){
+        return usuarioRepositorio.findByUsername(usuario);
+    }
+
     public List<Usuario> getAllUsuarios(){
         return usuarioRepositorio.findAll();
     }
@@ -33,6 +39,8 @@ public class UsuarioServiceImpl implements UsuarioService{
         Usuario usuarioIns = null;
 
         if(usuario != null){
+            String contraCifrada = MainSecurityConfiguration.getPasswordEncoder().encode(usuario.getContrasenya());
+            usuarioIns.setContrasenya(contraCifrada);
             usuarioIns = usuarioRepositorio.save(usuario);
         }
 

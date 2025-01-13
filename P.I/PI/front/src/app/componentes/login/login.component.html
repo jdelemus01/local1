@@ -1,14 +1,17 @@
-<form>
-    <div>
-        <label>Usuario:</label>
-        <input>
-    </div>
-    <div>
-        <label>Contraseña:</label>
-        <input>
-    </div>
-    <div>
-        <button>Entrar</button>
-    </div>
-    <p><a routerLink="/usForm/-1">¿No estás registrado? Hazte miembro</a></p>
-</form>
+<div>
+    <form #formLogin="ngForm" (ngSubmit)="mandarCreds(creds)">
+        <div>
+            <label>Usuario:</label>
+            <input id="usuario" name="usuario" type="usuario" [(ngModel)]="creds.usuario" required>
+        </div>
+
+        <div>
+            <label>Contraseña:</label>
+            <input id="contrasenya" name="contrasenya" type="password" [(ngModel)]="creds.contrasenya" required>
+        </div>
+
+        <div>
+            <button type="submit" [disabled]="!formLogin.valid">Entrar</button>
+        </div>
+    </form>
+</div>

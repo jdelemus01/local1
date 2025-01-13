@@ -11,6 +11,8 @@ public interface UsuarioService {
 
     public Optional<Usuario> getUsuarioById(Long id);
 
+    public Optional<Usuario> getUsuarioByUsername(String usuario);
+
     public List<Usuario> getAllUsuarios();
 
     public Usuario insertUsuario(Usuario usuario);

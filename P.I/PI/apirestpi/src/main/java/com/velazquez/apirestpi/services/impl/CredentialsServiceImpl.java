@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.velazquez.apirestpi.config.JWTProvider;
-import com.velazquez.apirestpi.config.MainSecurityConfiguration;
-import com.velazquez.apirestpi.models.Consumidor;
-import com.velazquez.apirestpi.models.Ofertante;
+import com.velazquez.apirestpi.dto.CredencialesDTO;
+import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.services.CredentialsService;
 
 @Service
@@ -23,12 +22,14 @@ public class CredentialsServiceImpl implements CredentialsService {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
+    @Autowired
     private final JWTProvider jwtProvider;
-
+    
     public CredentialsServiceImpl() {
         this.jwtProvider = new JWTProvider();
-    }   
-
+        }   
+        
+    /*
     @Override
     public boolean registroConsumidor(Consumidor consumidor) {
         Boolean todoOk = false;
@@ -66,29 +67,21 @@ public class CredentialsServiceImpl implements CredentialsService {
         }
         return todoOk;
     }
+     
+     */
 
     @Override
-    public String loginConsumidor(String email, String contrasenya) {
+    public String crearJWTLogin(CredencialesDTO creds) {
         String jwt = "";
-        Optional<Consumidor> consumidor = consumidorService.getConsumidorByEmail(email);
-
-        if(consumidor.isPresent()){            
-            if(MainSecurityConfiguration.getPasswordEncoder().matches(contrasenya, consumidor.get().getContrasenya())){
-                jwt = jwtProvider.crearToken(consumidor.get().getUsuario(), "CON");
-            }
-        }
-        return jwt;
-    }
-
-    @Override
-    public String loginOfertante(String email, String contrasenya) {
-        // TODO Auto-generated method stub
-        String jwt = "";
-        Optional<Ofertante> ofertante = ofertanteService.getOfertanteByEmail(email);
-
-        if(ofertante.isPresent()){            
-            if(MainSecurityConfiguration.getPasswordEncoder().matches(contrasenya, ofertante.get().getContrasenya())){
-                jwt = jwtProvider.crearToken(ofertante.get().getUsuario(), "CON");
+        Optional<Usuario> usuario = usuarioService.getUsuarioByUsername(creds.getUsuario());
+        if(usuario.isPresent()){
+            /*
+            if(MainSecurityConfiguration.getPasswordEncoder().matches(creds.getContrasenya(), usuario.get().getContrasenya())){
+                jwt = jwtProvider.crearToken(usuario.get());
+            } 
+             */
+            if(usuario.get().getContrasenya().equals(creds.getContrasenya())){
+                jwt = jwtProvider.crearToken(usuario.get());
             }
         }
         return jwt;

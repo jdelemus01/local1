@@ -26,9 +26,6 @@ public class Ofertante implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "contrasenya", nullable = true)
-    private String contrasenya;
-
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -103,14 +100,6 @@ public class Ofertante implements Serializable {
         this.email = email;
     }
 
-    public String getContrasenya() {
-        return contrasenya;
-    }
-
-    public void setContrasenya(String password) {
-        this.contrasenya = password;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -119,7 +108,6 @@ public class Ofertante implements Serializable {
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
         result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         result = prime * result + ((actividades == null) ? 0 : actividades.hashCode());
@@ -156,11 +144,6 @@ public class Ofertante implements Serializable {
                 return false;
         } else if (!email.equals(other.email))
             return false;
-        if (contrasenya == null) {
-            if (other.contrasenya != null)
-                return false;
-        } else if (!contrasenya.equals(other.contrasenya))
-            return false;
         if (fechaNacimiento == null) {
             if (other.fechaNacimiento != null)
                 return false;
@@ -187,11 +170,8 @@ public class Ofertante implements Serializable {
     @Override
     public String toString() {
         return "Ofertante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-                + ", contrasenya=" + contrasenya + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario
+                + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario
                 + ", actividades=" + actividades + ", rol=" + rol + "]";
     }
 
-    
-
-    
 }
