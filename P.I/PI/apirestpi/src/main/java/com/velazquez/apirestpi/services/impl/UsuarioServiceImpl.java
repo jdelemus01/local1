@@ -39,8 +39,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         Usuario usuarioIns = null;
 
         if(usuario != null){
-            String contraCifrada = MainSecurityConfiguration.getPasswordEncoder().encode(usuario.getContrasenya());
-            usuarioIns.setContrasenya(contraCifrada);
             usuarioIns = usuarioRepositorio.save(usuario);
         }
 

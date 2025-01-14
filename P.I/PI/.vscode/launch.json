@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ApirestpiApplication<apirestpi>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.velazquez.apirestpi.ApirestpiApplication",
+            "projectName": "apirestpi",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

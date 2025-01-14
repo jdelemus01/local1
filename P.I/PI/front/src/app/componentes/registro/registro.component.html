@@ -1,0 +1,35 @@
+<h1>Formulario de Registro</h1>
+<form #formRegistro="ngForm" (ngSubmit)="mandarCreds(formRegistro)">
+    <div>
+        <label>Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="ofertante.usuario.nombre" required>
+    </div>
+    <div>
+        <label>Apellido:</label>
+        <input type="text" id="apellido" name="apellidos" [(ngModel)]="ofertante.usuario.apellidos" required>
+    </div>
+    <div>
+        <label>Usuario:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="ofertante.usuario.username" required>
+    </div>
+    <div>
+        <label>Correo Electrónico:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="ofertante.email" required>
+    </div>
+    <div>
+        <label>Contraseña:</label>
+        <input type="password" id="contrasenya" name="contrasenya" [(ngModel)]="ofertante.usuario.contrasenya" required>
+    </div>
+    <div>
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="ofertante.usuario.fechaNacimiento"
+            required>
+    </div>
+    <div> <label>Tipo de Usuario:</label> <select id="tipoUsuario" name="tipoUsuario" [(ngModel)]="rol" required>
+            <option value="cons">Consumidor</option>
+            <option value="ofe">Ofertante</option>
+        </select> </div>
+    <div>
+        <button type="submit">Registrar</button>
+    </div>
+</form>

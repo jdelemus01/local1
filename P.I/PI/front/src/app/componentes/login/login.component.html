@@ -2,7 +2,7 @@
     <form #formLogin="ngForm" (ngSubmit)="mandarCreds(creds)">
         <div>
             <label>Usuario:</label>
-            <input id="usuario" name="usuario" type="usuario" [(ngModel)]="creds.usuario" required>
+            <input id="usuario" name="usuario" type="text" [(ngModel)]="creds.usuario" required>
         </div>
 
         <div>
@@ -14,4 +14,8 @@
             <button type="submit" [disabled]="!formLogin.valid">Entrar</button>
         </div>
     </form>
+
+    <div>
+        <a routerLink="/registro"><p>¿No formas parte de nuestra comunidad? ¡Únete!</p></a>
+    </div>
 </div>

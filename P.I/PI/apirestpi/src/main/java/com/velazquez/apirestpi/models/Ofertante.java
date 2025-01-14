@@ -17,12 +17,6 @@ public class Ofertante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
-
-    @Column(name = "apellido", nullable = false)
-    private String apellido;
-
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -46,22 +40,6 @@ public class Ofertante implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public Usuario getUsuario() {
@@ -105,8 +83,6 @@ public class Ofertante implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
@@ -128,16 +104,6 @@ public class Ofertante implements Serializable {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
-            return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
-            return false;
-        if (apellido == null) {
-            if (other.apellido != null)
-                return false;
-        } else if (!apellido.equals(other.apellido))
             return false;
         if (email == null) {
             if (other.email != null)
@@ -169,7 +135,7 @@ public class Ofertante implements Serializable {
 
     @Override
     public String toString() {
-        return "Ofertante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+        return "Ofertante [id=" + id +", email=" + email
                 + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario
                 + ", actividades=" + actividades + ", rol=" + rol + "]";
     }
