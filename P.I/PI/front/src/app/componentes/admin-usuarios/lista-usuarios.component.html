@@ -8,7 +8,6 @@
         @for (usuario of usuarios; track $index) {
             <tr>
                 <td>{{usuario.username}}</td>
-                <td>{{usuario.email}}</td>
                 <td><button routerLink="/usuarioForm/{{usuario.id}}">Editar</button></td>
                 <td><button>Borrar</button></td>
             </tr>

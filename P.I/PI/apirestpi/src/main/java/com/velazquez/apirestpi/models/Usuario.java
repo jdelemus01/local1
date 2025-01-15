@@ -1,6 +1,9 @@
 package com.velazquez.apirestpi.models;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "USUARIO")
@@ -30,6 +35,11 @@ public class Usuario implements Serializable {
 
     @Column(name = "contrasenya", unique = true, nullable = false)
     private String contrasenya;
+
+    @Column(name = "fecha_nacimiento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date fechaNacimiento;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Consumidor consumidor;
@@ -88,13 +98,42 @@ public class Usuario implements Serializable {
         this.ofertante = ofertante;
     }
 
+    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
         result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
+        result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((consumidor == null) ? 0 : consumidor.hashCode());
         result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
         result = prime * result + (activo ? 1231 : 1237);
@@ -115,6 +154,16 @@ public class Usuario implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
+            return false;
+        if (apellidos == null) {
+            if (other.apellidos != null)
+                return false;
+        } else if (!apellidos.equals(other.apellidos))
+            return false;
         if (username == null) {
             if (other.username != null)
                 return false;
@@ -124,6 +173,11 @@ public class Usuario implements Serializable {
             if (other.contrasenya != null)
                 return false;
         } else if (!contrasenya.equals(other.contrasenya))
+            return false;
+        if (fechaNacimiento == null) {
+            if (other.fechaNacimiento != null)
+                return false;
+        } else if (!fechaNacimiento.equals(other.fechaNacimiento))
             return false;
         if (consumidor == null) {
             if (other.consumidor != null)
@@ -142,9 +196,12 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", username=" + username + ", contrasenya=" + contrasenya + ", consumidor="
-                + consumidor + ", ofertante=" + ofertante + ", activo=" + activo + "]";
+        return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", username=" + username
+                + ", contrasenya=" + contrasenya + ", fechaNacimiento=" + fechaNacimiento + ", consumidor=" + consumidor
+                + ", ofertante=" + ofertante + ", activo=" + activo + "]";
     }
+
+    
 
      
 }

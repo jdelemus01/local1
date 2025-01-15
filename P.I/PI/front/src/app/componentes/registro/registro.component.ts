@@ -49,7 +49,10 @@ export class RegistroComponent {
         },
         actividades : []
       }
-      this.loginService.registrarOfertante(ofertante).subscribe();
+      this.loginService.registrarOfertante(ofertante).subscribe({
+        next: data => console.log(data)
+      }
+      );
     } else {
       let consumidor: Consumidor = {
         id: -1,

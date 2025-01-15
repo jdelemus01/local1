@@ -1,5 +1,5 @@
 @if(actividad.ofertante != null){
-<h1>Actividad ofertada por {{ actividad.ofertante.nombre }}</h1>
+<h1>Actividad ofertada por {{ actividad.ofertante.usuario.nombre }}</h1>
 }
 <div>
   <form #actForm="ngForm" (ngSubmit)="onSubmit(actForm.value)">

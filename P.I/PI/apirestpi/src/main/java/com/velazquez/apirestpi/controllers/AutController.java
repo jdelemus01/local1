@@ -2,6 +2,8 @@ package com.velazquez.apirestpi.controllers;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +40,11 @@ public class AutController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
+    private final Logger log = LoggerFactory.getLogger(AutController.class);
+
     @PostMapping("/registroOf")
     public ResponseEntity<?> registroOfertante(@RequestBody Ofertante ofertante) {
+        log.debug(ofertante.toString());
         Optional<Ofertante> ofertanteBd = ofertanteService.getOfertanteById(ofertante.getId());
 
         if (ofertanteBd.isPresent()) {
@@ -47,7 +52,7 @@ public class AutController {
         } else {
             if (ofertante.getUsuario().getId() == -1) {
                 ofertante.getUsuario().setContrasenya(MainSecurityConfiguration.getPasswordEncoder().encode(ofertante.getUsuario().getContrasenya()));
-                usuarioService.insertUsuario(ofertante.getUsuario());
+                ofertante.setUsuario(usuarioService.insertUsuario(ofertante.getUsuario()));
                 ofertanteService.insertOfertante(ofertante);
             } else {
                 ofertanteService.insertOfertante(ofertante);
@@ -66,7 +71,7 @@ public class AutController {
         } else {
             if (consumidor.getUsuario().getId() == -1) {
                 consumidor.getUsuario().setContrasenya(MainSecurityConfiguration.getPasswordEncoder().encode(consumidor.getUsuario().getContrasenya()));
-                usuarioService.insertUsuario(consumidor.getUsuario());
+                consumidor.setUsuario(usuarioService.insertUsuario(consumidor.getUsuario()));
                 consumidorService.insertConsumidor(consumidor);
             } else {
                 consumidorService.insertConsumidor(consumidor);
