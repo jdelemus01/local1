@@ -26,7 +26,7 @@ public class MainSecurityConfiguration {
            sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
            authorizeHttpRequests(authorize -> authorize
                //Aquí meter funcionalidad de ver actividades sin registro 
-               .requestMatchers("/auth/registroOf", "/auth/registroOf", "/auth/registroOf").permitAll()
+               .requestMatchers("/auth/registroOf", "/auth/login", "/auth/registroCons").permitAll()
                .anyRequest().authenticated());
 
        return http.build();

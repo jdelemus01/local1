@@ -18,6 +18,7 @@ import com.velazquez.apirestpi.dto.CredencialesDTO;
 import com.velazquez.apirestpi.dto.JwtDTO;
 import com.velazquez.apirestpi.models.Consumidor;
 import com.velazquez.apirestpi.models.Ofertante;
+import com.velazquez.apirestpi.models.Usuario;
 import com.velazquez.apirestpi.services.impl.ConsumidorServiceImpl;
 import com.velazquez.apirestpi.services.impl.CredentialsServiceImpl;
 import com.velazquez.apirestpi.services.impl.OfertanteServiceImpl;
@@ -51,7 +52,8 @@ public class AutController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } else {
             if (ofertante.getUsuario().getId() == -1) {
-                ofertante.getUsuario().setContrasenya(MainSecurityConfiguration.getPasswordEncoder().encode(ofertante.getUsuario().getContrasenya()));
+                ofertante.getUsuario().setContrasenya(
+                        MainSecurityConfiguration.getPasswordEncoder().encode(ofertante.getUsuario().getContrasenya()));
                 ofertante.setUsuario(usuarioService.insertUsuario(ofertante.getUsuario()));
                 ofertanteService.insertOfertante(ofertante);
             } else {
@@ -63,21 +65,18 @@ public class AutController {
 
     @PostMapping("/registroCons")
     public ResponseEntity<?> registroConsumidor(@RequestBody Consumidor consumidor) {
-        
-        Optional<Consumidor> consumidorBd = consumidorService.getConsumidorById(consumidor.getId());
 
-        if (consumidorBd.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        Optional<Usuario> usuarioBd = usuarioService.getUsuarioByUsername(consumidor.getUsuario().getUsername());
+        consumidorService.getConsumidorById(consumidor.getId());
+        if (usuarioBd.isPresent()) {
+            consumidorService.insertConsumidor(consumidor);
         } else {
-            if (consumidor.getUsuario().getId() == -1) {
-                consumidor.getUsuario().setContrasenya(MainSecurityConfiguration.getPasswordEncoder().encode(consumidor.getUsuario().getContrasenya()));
-                consumidor.setUsuario(usuarioService.insertUsuario(consumidor.getUsuario()));
-                consumidorService.insertConsumidor(consumidor);
-            } else {
-                consumidorService.insertConsumidor(consumidor);
-            }
-            return new ResponseEntity<>(consumidor ,HttpStatus.CREATED);
+            consumidor.getUsuario().setContrasenya(
+                    MainSecurityConfiguration.getPasswordEncoder().encode(consumidor.getUsuario().getContrasenya()));
+            consumidor.setUsuario(usuarioService.insertUsuario(consumidor.getUsuario()));
+            consumidorService.insertConsumidor(consumidor);
         }
+        return new ResponseEntity<>(consumidor, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")

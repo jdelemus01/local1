@@ -3,9 +3,6 @@ package com.velazquez.apirestpi.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "CONSUMIDOR")
@@ -17,11 +14,6 @@ public class Consumidor implements Serializable {
 
     @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "fecha_nacimiento", nullable = false)
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date fechaNacimiento;
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
@@ -35,14 +27,6 @@ public class Consumidor implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Usuario getUsuario() {
@@ -75,7 +59,6 @@ public class Consumidor implements Serializable {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         result = prime * result + ((rol == null) ? 0 : rol.hashCode());
         return result;
@@ -100,11 +83,6 @@ public class Consumidor implements Serializable {
                 return false;
         } else if (!email.equals(other.email))
             return false;
-        if (fechaNacimiento == null) {
-            if (other.fechaNacimiento != null)
-                return false;
-        } else if (!fechaNacimiento.equals(other.fechaNacimiento))
-            return false;
         if (usuario == null) {
             if (other.usuario != null)
                 return false;
@@ -121,7 +99,7 @@ public class Consumidor implements Serializable {
     @Override
     public String toString() {
         return "Consumidor [id=" + id +", email=" + email
-                + ", fechaNacimiento=" + fechaNacimiento + ", usuario=" + usuario + ", rol="
+                +", usuario=" + usuario + ", rol="
                 + rol + "]";
     }
 

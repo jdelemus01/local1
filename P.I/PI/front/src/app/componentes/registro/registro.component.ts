@@ -66,7 +66,10 @@ export class RegistroComponent {
           contrasenya: valores.value.contrasenya
         }
       }
-      this.loginService.registrarConsumidor(consumidor).subscribe();
+      this.loginService.registrarConsumidor(consumidor).subscribe({
+        next: data => console.log(data)
+      }
+      );
     }
   }
 }

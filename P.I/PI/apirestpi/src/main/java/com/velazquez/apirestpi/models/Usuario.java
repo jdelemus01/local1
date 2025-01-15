@@ -29,17 +29,19 @@ public class Usuario implements Serializable {
 
     @Column(name = "apellidos", unique = true, nullable = false)
     private String apellidos;
-
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
-
-    @Column(name = "contrasenya", unique = true, nullable = false)
-    private String contrasenya;
-
+    
+    
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fechaNacimiento;
+    
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+    
+    @Column(name = "contrasenya", unique = true, nullable = false)
+    private String contrasenya;
+
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Consumidor consumidor;
