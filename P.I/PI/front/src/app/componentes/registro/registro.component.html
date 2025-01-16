@@ -22,14 +22,13 @@
     </div>
     <div>
         <label>Fecha de Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="ofertante.usuario.fechaNacimiento"
-            required>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="ofertante.usuario.fechaNacimiento">
     </div>
     <div> <label>Tipo de Usuario:</label> <select id="tipoUsuario" name="tipoUsuario" [(ngModel)]="rol" required>
             <option value="cons">Consumidor</option>
             <option value="ofe">Ofertante</option>
         </select> </div>
     <div>
-        <button type="submit">Registrar</button>
+        <button [disabled]="!formRegistro.valid" type="submit">Registrar</button>
     </div>
 </form>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Credenciales } from '../../modelos/credenciales';
 import { ConsumidorService } from '../../servicios/consumidor.service';
 import { OfertanteService } from '../../servicios/ofertante.service';
@@ -20,19 +20,18 @@ export class LoginComponent {
   public creds : Credenciales = <Credenciales>{};
   //Constructor-------------------------------------------------------------------------------------------
   constructor(
-    /*
-    private consService : ConsumidorService, 
-    private oferService : OfertanteService,
-    private usuarioService : UsuarioService
-     */
-    private authService : AuthService
+    private authService : AuthService,
+    private router : Router
   ){
-
+    //En caso de que se entre al login, se cierra sesión automáticamente
+    sessionStorage.removeItem("token");
   }
   //Métodos-----------------------------------------------------------------------------------------------
   mandarCreds(login : Credenciales) {
     this.authService.enviarLogin(login).subscribe({
-      next: data => {sessionStorage.setItem("token", data.token);} 
+      next: data => {sessionStorage.setItem("token", data.token);
+                        this.router.navigate(["/main/"]);
+      } 
 
     }
     ); 

@@ -42,7 +42,6 @@ public class ConsumidorServiceImpl implements ConsumidorService {
     @Override
     public Optional<Consumidor> getConsumidorByEmail(String email) {
         Optional<Consumidor> consumidorGet = consumidorRepositorio.findByEmail(email);
-        log.error("MIRA ESTOOOOOOOOOOOOOOOOOOOOOOOOOOO " + consumidorGet.get());
         return consumidorGet;
     }
 

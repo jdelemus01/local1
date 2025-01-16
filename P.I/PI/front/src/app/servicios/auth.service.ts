@@ -63,9 +63,20 @@ export class AuthService {
     return userName;
   }
 
+  getDecodedId(){
+    let token = this.getToken();
+    let idUser = 0;
+
+    if(token != "" && token != null){
+        idUser = this.decodeToken(token).id;
+    }
+
+    return idUser;
+  }
+
   getOfeRoleDecoded(){
     let token = this.getToken();
-    let ofeRole = "";
+    let ofeRole = 1;
 
     if(token != "" && token != null){
         ofeRole = this.decodeToken(token).ofe;
@@ -76,7 +87,7 @@ export class AuthService {
 
   getConsRoleDecoded(){
     let token = this.getToken();
-    let consRole = "";
+    let consRole = 1;
 
     if(token != "" && token != null){
         consRole = this.decodeToken(token).cons;

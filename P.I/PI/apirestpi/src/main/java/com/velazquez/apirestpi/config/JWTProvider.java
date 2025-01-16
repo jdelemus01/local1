@@ -29,15 +29,15 @@ public class JWTProvider {
         Algorithm algoritmo = Algorithm.HMAC256(claveSecreta);
         Instant ahora = Instant.now();
 
-        boolean ofe = false;
-        boolean cons = false;
+        Integer ofe = 1;
+        Integer cons = 1;
 
         if(usuarioDto.getConsumidor() != -1){
-            cons = true;
+            cons = 0;
         }
 
         if(usuarioDto.getOfertante() != -1){
-            ofe = true;
+            ofe = 0;
         }
 
         Instant limite = ahora.plus(1, ChronoUnit.HOURS);
@@ -46,6 +46,7 @@ public class JWTProvider {
                 .withSubject(usuarioDto.getUsername())
                 .withClaim("ofe", ofe)
                 .withClaim("cons", cons)
+                .withClaim("id", usuarioDto.getId())
                 .withIssuedAt(Date.from(ahora))
                 .withExpiresAt(Date.from(limite))
                 .sign(algoritmo);

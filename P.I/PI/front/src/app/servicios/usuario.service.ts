@@ -21,21 +21,24 @@ export class UsuarioService {
   getAllUsuarios() {
     let peticion: string = `${this.URL}/allUsuarios`;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any[]>(peticion);
+    return this.http.get<any[]>(peticion, {headers});
   }
 
   getUsuarioById(id: number) {
     let peticion: string = `${this.URL}/getUsuario/` + id;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any>(peticion);
+    return this.http.get<any>(peticion, {headers});
   }
 
   getUsuarioByUsername(username: string) {
     let peticion: string = `${this.URL}/getUsuarioUsername/` + username;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any>(peticion);
+    return this.http.get<any>(peticion, {headers});
   }
 }

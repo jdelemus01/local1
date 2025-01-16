@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Ofertante } from '../../modelos/ofertante';
 import { Consumidor } from '../../modelos/consumidor';
 import { AuthService } from '../../servicios/auth.service';
@@ -29,7 +30,10 @@ export class RegistroComponent {
 
   public rol: string = "cons";
 
-  constructor(private loginService : AuthService) {
+  constructor(
+    private loginService : AuthService,
+    private router : Router
+  ) {
 
   }
 
@@ -50,7 +54,9 @@ export class RegistroComponent {
         actividades : []
       }
       this.loginService.registrarOfertante(ofertante).subscribe({
-        next: data => console.log(data)
+        next: data => {console.log(data);
+                        this.router.navigate(["/login"]);
+        }
       }
       );
     } else {
@@ -67,7 +73,9 @@ export class RegistroComponent {
         }
       }
       this.loginService.registrarConsumidor(consumidor).subscribe({
-        next: data => console.log(data)
+        next: data => {this.router.navigate(["/login"]);
+          console.log(data)
+        }
       }
       );
     }

@@ -27,15 +27,17 @@ export class ConsumidorService {
   getConsumidorByUsername(usuario: number) {
     let peticion = `${this.URL}/getConsUser/` + usuario;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any>(peticion);
+    return this.http.get<Consumidor>(peticion, {headers});
   }
 
   insertConsumidor(consumidor: Consumidor) {
     let peticion = `${this.URL}/insCons`;
     console.log(peticion, "Consumidor recibido: ", consumidor);
+    let headers = this.headerToken;
 
-    return this.http.post<any>(peticion, consumidor);
+    return this.http.post<any>(peticion, consumidor, {headers});
   }
 
 }

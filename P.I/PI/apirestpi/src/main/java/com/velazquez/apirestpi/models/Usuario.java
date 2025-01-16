@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,9 +46,11 @@ public class Usuario implements Serializable {
 
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Consumidor consumidor;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Ofertante ofertante; 
 
      private boolean activo;
@@ -90,6 +94,10 @@ public class Usuario implements Serializable {
 
     public void setConsumidor(Consumidor consumidor) {
         this.consumidor = consumidor;
+
+        if(consumidor != null){
+            this.consumidor.setUsuario(this);
+        }
     }
 
     public Ofertante getOfertante() {
@@ -98,6 +106,10 @@ public class Usuario implements Serializable {
 
     public void setOfertante(Ofertante ofertante) {
         this.ofertante = ofertante;
+
+        if(ofertante != null){
+            this.ofertante.setUsuario(this);
+        }
     }
 
     

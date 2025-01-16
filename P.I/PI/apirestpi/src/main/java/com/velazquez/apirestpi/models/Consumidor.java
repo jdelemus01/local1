@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "CONSUMIDOR")
 public class Consumidor implements Serializable {
@@ -17,6 +19,7 @@ public class Consumidor implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 
     private String rol = "CON";

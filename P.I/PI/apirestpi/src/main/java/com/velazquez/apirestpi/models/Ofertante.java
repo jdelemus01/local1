@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "OFERTANTE")
@@ -20,6 +22,7 @@ public class Ofertante implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "ofertante", cascade = CascadeType.ALL, orphanRemoval = true)

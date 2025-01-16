@@ -1,5 +1,7 @@
 package com.velazquez.apirestpi.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,19 +24,17 @@ public class UsuarioController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
-    /*
     @GetMapping("getUsuarioUsername/{username}")
     public ResponseEntity<?> getUsuarioByUsername(@PathVariable String username) {
-        UserDetails usuarioGet = usuarioService.loadUserByUsername(username);
+        Optional<Usuario> usuarioGet = usuarioService.getUsuarioByUsername(username);
 
-        if(usuarioGet != null){
+        if(usuarioGet.isPresent()){
             return new ResponseEntity<>(usuarioGet, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("No se ha encontrado ningún usuario bajo ese username.", HttpStatus.NOT_FOUND);
         }
 
     }
-     */
     
 
     @GetMapping("getUsuario/{id}")

@@ -14,5 +14,11 @@ export const environment = {
             });
         });
         return res;
+    },
+
+    checkIfTokenExists : function (){
+        let token = sessionStorage.getItem("token");
+        
+        return token == "";
     }
 }
