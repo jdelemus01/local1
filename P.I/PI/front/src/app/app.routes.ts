@@ -6,6 +6,8 @@ import { ActividadesOferComponent } from './componentes/actividades-ofer/activid
 import { ActividadFormComponent } from './componentes/actividad-form/actividad-form.component';
 import { ActividadesConsComponent } from './componentes/actividades-cons/actividades-cons.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { MenuComponent } from './componentes/menu/menu.component';
+import { MainConsComponent } from './componentes/main-cons/main-cons.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'registro',
     component: RegistroComponent,
+  },
+  {
+    path: 'main',
+    component: MenuComponent
   },
   {
     path: 'adminActs',
@@ -33,8 +39,8 @@ export const routes: Routes = [
     component: ActividadFormComponent,
   },
   {
-    path: 'actsCons/:id',
-    component: ActividadesConsComponent,
+    path: 'mainC/:id',
+    component: MainConsComponent,
   },
   {
     path: '**',

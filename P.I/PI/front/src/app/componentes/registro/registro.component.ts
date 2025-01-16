@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Ofertante } from '../../modelos/ofertante';
 import { Consumidor } from '../../modelos/consumidor';
-import { LoginService } from '../../servicios/login.service';
+import { AuthService } from '../../servicios/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,14 +22,14 @@ export class RegistroComponent {
       apellidos: "",
       fechaNacimiento: new Date,
       username: "",
-      contrasenya: ""
+      password: ""
     },
     actividades: []
   };
 
   public rol: string = "cons";
 
-  constructor(private loginService : LoginService) {
+  constructor(private loginService : AuthService) {
 
   }
 
@@ -45,7 +45,7 @@ export class RegistroComponent {
           apellidos: valores.value.apellidos,
           fechaNacimiento: valores.value.fechaNacimiento,
           username: valores.value.username,
-          contrasenya: valores.value.contrasenya
+          password: valores.value.contrasenya
         },
         actividades : []
       }
@@ -63,7 +63,7 @@ export class RegistroComponent {
           apellidos: valores.value.apellidos,
           fechaNacimiento: valores.value.fechaNacimiento,
           username: valores.value.username,
-          contrasenya: valores.value.contrasenya
+          password: valores.value.contrasenya
         }
       }
       this.loginService.registrarConsumidor(consumidor).subscribe({

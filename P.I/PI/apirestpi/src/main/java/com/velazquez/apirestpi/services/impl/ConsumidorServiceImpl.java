@@ -34,7 +34,7 @@ public class ConsumidorServiceImpl implements ConsumidorService {
     }
 
     @Override
-    public Optional<Consumidor> getConsumidorByUsuario(Long username) {
+    public Optional<Consumidor> getConsumidorByUsername(Long username) {
         Optional<Consumidor> consumidorGet = consumidorRepositorio.findByUsuario(username);
         return consumidorGet;
     }
@@ -42,6 +42,7 @@ public class ConsumidorServiceImpl implements ConsumidorService {
     @Override
     public Optional<Consumidor> getConsumidorByEmail(String email) {
         Optional<Consumidor> consumidorGet = consumidorRepositorio.findByEmail(email);
+        log.error("MIRA ESTOOOOOOOOOOOOOOOOOOOOOOOOOOO " + consumidorGet.get());
         return consumidorGet;
     }
 

@@ -1,12 +1,12 @@
 package com.velazquez.apirestpi.services;
 
 
-import com.velazquez.apirestpi.dto.CredencialesDTO;
+import com.velazquez.apirestpi.dto.UsuarioDTO;
 import com.velazquez.apirestpi.models.Usuario;
 
 public interface CredentialsService {
 
-    public String crearJWTLogin(CredencialesDTO creds);
+    public String crearJWTLogin(UsuarioDTO usuarioDTO);
 
     public boolean registro(Usuario usuario);
 }

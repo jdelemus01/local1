@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Actividad } from '../modelos/actividad';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,21 @@ import { Actividad } from '../modelos/actividad';
 export class ActividadService {
 
   private URL : string = "http://localhost:8084/actividad";
+  private headerToken : HttpHeaders;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private authService : AuthService) {
+    this.headerToken = new HttpHeaders({
+      'Content-Type': 'application/json', 
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+   }
 
   getAllActividades(){
     let peticion = `${this.URL}/allActividades`;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any[]>(peticion);
+    return this.http.get<any[]>(peticion, {headers});
   }
 
   getActividadesByOfertante(idOf: number){

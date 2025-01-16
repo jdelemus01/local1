@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActividadService } from '../../servicios/actividad.service';
 import { Actividad } from '../../modelos/actividad';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { SharedDataService } from '../../servicios/shared-data.service';
 
 @Component({
   selector: 'app-actividades-ofer',
@@ -18,8 +17,7 @@ export class ActividadesOferComponent {
 
   constructor(
     private actService: ActividadService,
-    private ar: ActivatedRoute,
-    private sharedDataService: SharedDataService
+    private ar: ActivatedRoute
   ) {
 
     this.idOf = this.ar.snapshot.params["id"];

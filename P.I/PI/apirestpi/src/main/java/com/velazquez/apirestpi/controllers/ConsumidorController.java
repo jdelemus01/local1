@@ -36,7 +36,7 @@ public class ConsumidorController {
 
     @GetMapping("getConsUser/{username}")
     public ResponseEntity<Consumidor> getConsumidorByUsername(@PathVariable Long username) {
-        Optional<Consumidor> consumidorGet = consumidorService.getConsumidorByUsuario(username);
+        Optional<Consumidor> consumidorGet = consumidorService.getConsumidorByUsername(username);
 
         if(consumidorGet.isPresent()){
             return new ResponseEntity<>(consumidorGet.get(), HttpStatus.OK);

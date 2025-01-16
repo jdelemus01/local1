@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -20,12 +21,14 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class MainSecurityConfiguration {
 
+    private final JWTProvider jwtProvider = new JWTProvider();
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
        http.csrf(csrf -> csrf.disable()).
+           addFilterBefore(new FilterJWT(jwtProvider),BasicAuthenticationFilter.class).
            sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
            authorizeHttpRequests(authorize -> authorize
-               //Aquí meter funcionalidad de ver actividades sin registro 
                .requestMatchers("/auth/registroOf", "/auth/login", "/auth/registroCons").permitAll()
                .anyRequest().authenticated());
 
@@ -45,8 +48,7 @@ public class MainSecurityConfiguration {
         configuracion.setAllowedHeaders(Arrays.asList(
             org.springframework.http.HttpHeaders.AUTHORIZATION,
             org.springframework.http.HttpHeaders.CONTENT_TYPE,
-            org.springframework.http.HttpHeaders.ACCEPT,
-            "Sec-Fetch-Site"
+            org.springframework.http.HttpHeaders.ACCEPT
         ));
 
         configuracion.setAllowedMethods(Arrays.asList(

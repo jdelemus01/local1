@@ -8,7 +8,7 @@ import { Consumidor } from '../modelos/consumidor';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   private URL: string = "http://localhost:8084/auth";
 
@@ -36,5 +36,52 @@ export class LoginService {
     console.log("EL REGISTRO ENVÍA", peticion, consumidor, headers);
 
     return this.http.post<Consumidor>(peticion, consumidor, {headers});
+  }
+
+  saveToken(jwt : string){
+    sessionStorage.setItem("token", jwt)
+  }
+
+  getToken(){
+    return sessionStorage.getItem("token");
+  }
+
+  decodeToken(token : string){
+    const util = token.split(".")[1];
+
+    return JSON.parse(atob(util));
+  }
+
+  getDecodedUsername(){
+    let token = this.getToken();
+    let userName = "";
+
+    if(token != "" && token != null){
+        userName = this.decodeToken(token).sub;
+    }
+
+    return userName;
+  }
+
+  getOfeRoleDecoded(){
+    let token = this.getToken();
+    let ofeRole = "";
+
+    if(token != "" && token != null){
+        ofeRole = this.decodeToken(token).ofe;
+    }
+
+    return ofeRole;
+  }
+
+  getConsRoleDecoded(){
+    let token = this.getToken();
+    let consRole = "";
+
+    if(token != "" && token != null){
+        consRole = this.decodeToken(token).cons;
+    }
+
+    return consRole;
   }
 }

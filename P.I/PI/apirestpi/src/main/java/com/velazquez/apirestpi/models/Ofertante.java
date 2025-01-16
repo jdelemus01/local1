@@ -115,7 +115,7 @@ public class Ofertante implements Serializable {
     @Override
     public String toString() {
         return "Ofertante [id=" + id + ", email=" + email
-                + ", usuario=" + usuario
+                + ", usuario=" + usuario.getUsername()
                 + ", actividades=" + actividades + ", rol=" + rol + "]";
     }
 

@@ -24,10 +24,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", unique = true, nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "apellidos", unique = true, nullable = false)
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
     
     
@@ -39,8 +39,8 @@ public class Usuario implements Serializable {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
     
-    @Column(name = "contrasenya", unique = true, nullable = false)
-    private String contrasenya;
+    @Column(name = "contrasenya", nullable = false)
+    private String password;
 
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -67,12 +67,12 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-    public String getContrasenya() {
-        return contrasenya;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
+    public void setPassword(String contrasenya) {
+        this.password = contrasenya;
     }
     
 
@@ -134,7 +134,7 @@ public class Usuario implements Serializable {
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
-        result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
         result = prime * result + ((consumidor == null) ? 0 : consumidor.hashCode());
         result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
@@ -171,10 +171,10 @@ public class Usuario implements Serializable {
                 return false;
         } else if (!username.equals(other.username))
             return false;
-        if (contrasenya == null) {
-            if (other.contrasenya != null)
+        if (password == null) {
+            if (other.password != null)
                 return false;
-        } else if (!contrasenya.equals(other.contrasenya))
+        } else if (!password.equals(other.password))
             return false;
         if (fechaNacimiento == null) {
             if (other.fechaNacimiento != null)
@@ -199,7 +199,7 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", username=" + username
-                + ", contrasenya=" + contrasenya + ", fechaNacimiento=" + fechaNacimiento + ", consumidor=" + consumidor
+                + ", contrasenya=" + password + ", fechaNacimiento=" + fechaNacimiento + ", consumidor=" + consumidor
                 + ", ofertante=" + ofertante + ", activo=" + activo + "]";
     }
 

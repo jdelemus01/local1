@@ -5,7 +5,7 @@ import { Credenciales } from '../../modelos/credenciales';
 import { ConsumidorService } from '../../servicios/consumidor.service';
 import { OfertanteService } from '../../servicios/ofertante.service';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { LoginService } from '../../servicios/login.service';
+import { AuthService } from '../../servicios/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,14 +25,14 @@ export class LoginComponent {
     private oferService : OfertanteService,
     private usuarioService : UsuarioService
      */
-    private loginService : LoginService
+    private authService : AuthService
   ){
 
   }
   //Métodos-----------------------------------------------------------------------------------------------
   mandarCreds(login : Credenciales) {
-    this.loginService.enviarLogin(login).subscribe({
-      next: data => {console.log(data);} 
+    this.authService.enviarLogin(login).subscribe({
+      next: data => {sessionStorage.setItem("token", data.token);} 
 
     }
     ); 

@@ -99,7 +99,7 @@ public class Consumidor implements Serializable {
     @Override
     public String toString() {
         return "Consumidor [id=" + id +", email=" + email
-                +", usuario=" + usuario + ", rol="
+                +", usuario=" + usuario.getUsername() + ", rol="
                 + rol + "]";
     }
 
