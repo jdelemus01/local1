@@ -1,0 +1,30 @@
+<h1>EDITAR CREDENCIALES</h1>
+<form #formEditarCons="ngForm" (ngSubmit)="mandarCreds(formEditarCons)">
+    <div>
+        <label>Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="usuario.nombre" required>
+    </div>
+    <div>
+        <label>Apellido:</label>
+        <input type="text" id="apellido" name="apellidos" [(ngModel)]="usuario.apellidos" required>
+    </div>
+    <div>
+        <label>Usuario:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="usuario.username" required>
+    </div>
+    <div>
+        <label>Correo Electrónico:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required>
+    </div>
+    <div>
+        <label>Contraseña:</label>
+        <input type="password" id="contrasenya" name="contrasenya" [(ngModel)]="usuario.password" required>
+    </div>
+    <div>
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="usuario.fechaNacimiento">
+    </div>
+    <div>
+        <button [disabled]="!formEditarCons.valid" type="submit">Registrar</button>
+    </div>
+</form>

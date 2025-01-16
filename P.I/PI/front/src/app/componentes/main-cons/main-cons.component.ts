@@ -33,8 +33,10 @@ export class MainConsComponent {
           this.consumidor = data;
         });
   
-      this.actividadService.getAllActividades().subscribe((data) => {
-        this.acts = data;
+      this.actividadService.getAllActividades().subscribe({
+        next : data => {
+          this.acts = data;
+        }
       });
     }
 }

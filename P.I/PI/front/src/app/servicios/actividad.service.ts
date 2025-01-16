@@ -29,35 +29,40 @@ export class ActividadService {
   getActividadesByOfertante(idOf: number){
     let peticion = `${this.URL}/getActsByOf/`+idOf;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any>(peticion);
+    return this.http.get<any>(peticion, {headers});
   }
 
   deleteActividad(id:number){
     let peticion: string = `${this.URL}/borrarActividad/`+id;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.delete<any>(peticion);
+    return this.http.delete<any>(peticion, {headers});
   }
 
   getActividad(id: number){
     let peticion = `${this.URL}/getActividad/`+id;
     console.log(peticion);
+    let headers = this.headerToken;
 
-    return this.http.get<any>(peticion);
+    return this.http.get<any>(peticion, {headers});
   }
 
   insertActividad(actIns: Actividad){
     let peticion = `${this.URL}/insertarActividad`;
     console.log(peticion, actIns);
+    let headers = this.headerToken;
 
-    return this.http.post<any>(peticion, actIns);
+    return this.http.post<any>(peticion, actIns, {headers});
   }
 
   updateActividad(actUpdate: Actividad){
     let peticion = `${this.URL}/modificarActividad/`+actUpdate.id;
     console.log("El método UPDATE ACTIVIDAD RECIBE: " , peticion, actUpdate);
+    let headers = this.headerToken;
 
-    return this.http.put<any[]>(peticion, actUpdate);
+    return this.http.put<any[]>(peticion, actUpdate, {headers});
   }
 }

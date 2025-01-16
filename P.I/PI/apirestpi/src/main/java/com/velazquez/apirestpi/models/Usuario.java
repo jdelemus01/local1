@@ -148,8 +148,8 @@ public class Usuario implements Serializable {
         result = prime * result + ((username == null) ? 0 : username.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
-        result = prime * result + ((consumidor == null) ? 0 : consumidor.hashCode());
-        result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());
+        /*result = prime * result + ((consumidor == null) ? 0 : consumidor.hashCode());
+        result = prime * result + ((ofertante == null) ? 0 : ofertante.hashCode());*/
         result = prime * result + (activo ? 1231 : 1237);
         return result;
     }

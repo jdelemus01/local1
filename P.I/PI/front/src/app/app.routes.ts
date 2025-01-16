@@ -8,6 +8,7 @@ import { ActividadesConsComponent } from './componentes/actividades-cons/activid
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { MainConsComponent } from './componentes/main-cons/main-cons.component';
+import { EditConsumidorComponent } from './componentes/edit-consumidor/edit-consumidor.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,10 @@ export const routes: Routes = [
   {
     path: 'mainC/:id',
     component: MainConsComponent,
+  },
+  {
+    path: 'editC/:id',
+    component: EditConsumidorComponent,
   },
   {
     path: '**',
